@@ -8,6 +8,7 @@ import { ProfileComponent } from './user/profile/profile.component';
 import { MyBooksComponent } from './user/my-books/my-books.component';
 import { MyFavouriteComponent } from './user/my-favourite/my-favourite.component';
 import { MyReviewsComponent } from './user/my-reviews/my-reviews.component';
+import { CurrentBookComponent } from './books/current-book/current-book.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -15,7 +16,7 @@ export const routes: Routes = [
     // Book routing
     { path: 'books-catalog', children: [
         { path: '', component: BooksCatalogComponent },
-        //{ path: ':bookId', component: CurrentBook, canActivate: [AuthGuard] },
+        { path: ':bookId', component: CurrentBookComponent, /*canActivate: [AuthGuard] */},
     ] },
      // User routing
     { path: 'login', component: LoginComponent },
