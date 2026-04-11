@@ -28,9 +28,13 @@
               "src/styles.css",
               "src/assets/css/bootstrap.min.css",
               "src/assets/css/main.css",
-              "src/assets/css/all.min.css"
+              "src/assets/css/all.min.css",
+              "src/assets/css/animate.css",
+              "src/assets/css/magnific-popup.css",
+              "src/assets/css/meanmenu.css",
+              "src/assets/css/nice-select.css",
+              "src/assets/css/swiper-bundle.min.css"
             ]
-
           },
           "configurations": {
             "production": {

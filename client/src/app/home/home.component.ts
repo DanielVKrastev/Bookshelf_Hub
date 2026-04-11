@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { HeroSectionComponent } from "./hero-section/hero-section.component";
-import { MostHighReviewBooksComponent } from "./most-high-review-books/most-high-review-books.component";
+import { TopRatingBooksComponent } from "./top-rating-books/top-rating-books.component";
 
 @Component({
   selector: 'app-home',
-  imports: [HeroSectionComponent, MostHighReviewBooksComponent],
+  imports: [HeroSectionComponent, TopRatingBooksComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
