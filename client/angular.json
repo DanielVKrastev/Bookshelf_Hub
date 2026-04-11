@@ -25,8 +25,12 @@
               }
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "src/assets/css/bootstrap.min.css",
+              "src/assets/css/main.css",
+              "src/assets/css/all.min.css"
             ]
+
           },
           "configurations": {
             "production": {
