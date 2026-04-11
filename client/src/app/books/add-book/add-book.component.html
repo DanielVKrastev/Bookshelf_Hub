@@ -1,0 +1,95 @@
+<app-breadcrumb />
+<!-- Add book-->
+<form class="book-add-form two-columns">
+
+    <!-- Basic Information -->
+    <div class="book-group">
+        <h3>Basic Information</h3>
+
+        <div class="book-fields">
+
+            <div class="book-field">
+                <label>Title *</label>
+                <input type="text" name="title">
+            </div>
+
+            <div class="book-field">
+                <label>Author *</label>
+                <input type="text" name="author">
+            </div>
+
+            <div class="book-field">
+                <label>Category *</label>
+
+                <select name="category">
+                    <option value="">Select category</option>
+                    <option value="fiction">Fiction</option>
+                    <option value="non-fiction">Non-Fiction</option>
+                    <option value="fantasy">Fantasy</option>
+                    <option value="science-fiction">Science Fiction</option>
+                    <option value="mystery">Mystery / Thriller</option>
+                    <option value="romance">Romance</option>
+                    <option value="horror">Horror</option>
+                    <option value="historical">Historical</option>
+                    <option value="biography">Biography</option>
+                    <option value="self-help">Self-Help</option>
+                    <option value="business">Business</option>
+                    <option value="science">Science</option>
+                    <option value="technology">Technology</option>
+                    <option value="children">Children's Books</option>
+                    <option value="young-adult">Young Adult</option>
+                    <option value="comics">Comics / Graphic Novels</option>
+                    <option value="poetry">Poetry</option>
+                </select>
+            </div>
+
+            <div class="book-field">
+                <label>Language *</label>
+                <input type="text" name="language">
+            </div>
+
+            <div class="book-field full">
+                <label>Description</label>
+                <textarea name="description"></textarea>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Publication -->
+    <div class="book-group">
+        <h3>Publication Information</h3>
+
+        <div class="book-fields">
+
+            <div class="book-field">
+                <label>Publisher *</label>
+                <input type="text" name="publisher">
+            </div>
+
+            <div class="book-field">
+                <label>Publication Date *</label>
+                <input type="date" name="publicationDate">
+            </div>
+
+            <div class="book-field">
+                <label>Pages *</label>
+                <input type="number" name="pages">
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Cover -->
+    <div class="book-group">
+        <h3>Book Cover</h3>
+
+        <div class="book-field">
+            <label>Upload Cover Image</label>
+            <input type="file" name="coverImage">
+        </div>
+    </div>
+
+    <button class="book-submit-btn theme-btn">Add Book</button>
+
+</form>

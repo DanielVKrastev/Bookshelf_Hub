@@ -1,0 +1,53 @@
+.book-add-form{
+     margin: 20px 100px 20px 100px;
+}
+
+.book-group{
+    margin: 20px;
+}
+
+.book-fields{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.book-field.full{
+    grid-column:1 / -1;
+}
+
+.book-field{
+    display:flex;
+    flex-direction:column;
+}
+
+.book-field label{
+    margin-bottom:6px;
+    font-weight:500;
+}
+
+.book-field input,
+.book-field select,
+.book-field textarea{
+    color: black;
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:6px;
+    font-size:14px;
+}
+
+.book-field textarea{
+    min-height:100px;
+}
+.book-submit-btn{
+    display: block;
+    margin: 20px auto 0;
+    min-width: 300px;
+}
+
+/* mobile */
+@media (max-width:768px){
+    .book-fields{
+        grid-template-columns:1fr;
+    }
+}
