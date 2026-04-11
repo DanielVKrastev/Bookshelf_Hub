@@ -1,0 +1,88 @@
+.register-section{
+    min-height:80vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background-size:cover;
+    background-position:center;
+    padding:40px 20px;
+}
+
+.register-container{
+    width:100%;
+    max-width:620px;
+    background:#fff;
+    padding:45px;
+    border-radius:12px;
+    box-shadow:0 15px 40px rgba(0,0,0,0.1);
+}
+
+.register-header{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.register-header h2{
+    font-size:28px;
+    margin-bottom:5px;
+}
+
+.register-header p{
+    font-size:14px;
+    color:#666;
+}
+
+.register-field{
+    margin-bottom:18px;
+}
+
+.register-field label{
+    display:block;
+    margin-bottom:6px;
+    font-weight:500;
+}
+
+.register-field input{
+    width:100%;
+    padding:12px 14px;
+    border:1px solid #ddd;
+    border-radius:6px;
+    font-size:14px;
+    transition:0.3s;
+}
+
+.register-field input:focus{
+    border-color:#000;
+    outline:none;
+}
+
+.register-btn{
+    width:100%;
+    padding:13px;
+    border:none;
+    background:#000;
+    color:#fff;
+    border-radius:6px;
+    font-size:15px;
+    cursor:pointer;
+    margin-top:10px;
+}
+
+.register-btn:hover{
+    background:#333;
+}
+
+.register-footer{
+    text-align:center;
+    margin-top:25px;
+}
+
+.register-footer a{
+    color:#000;
+    font-weight:500;
+    text-decoration:none;
+}
+
+.register-footer a:hover{
+    text-decoration:underline;
+}
