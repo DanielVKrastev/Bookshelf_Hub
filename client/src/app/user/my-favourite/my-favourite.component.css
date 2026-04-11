@@ -18,24 +18,13 @@
     font-weight:500;
 }
 
-/* DELETE button */
-.btn-delete{
-    background:#ffe5e5;
-    color:#d11a2a;
-}
-
-.btn-delete:hover{
-    background:#ffcccc;
-    transform:translateY(-2px);
-}
-
-/* EDIT button */
-.btn-edit{
+/* unfavourite button */
+.btn-unfavourite{
     background:#e8f0ff;
     color:#1a4ed1;
 }
 
-.btn-edit:hover{
+.btn-unfavourite:hover{
     background:#d6e4ff;
     transform:translateY(-2px);
 }

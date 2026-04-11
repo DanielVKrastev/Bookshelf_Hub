@@ -3,9 +3,9 @@ import { BreadcrumbComponent } from "../../core/breadcrumb/breadcrumb.component"
 import { RouterLink } from "@angular/router";
 
 @Component({
-  selector: 'app-my-books',
+  selector: 'app-my-favourite',
   imports: [BreadcrumbComponent, RouterLink],
-  templateUrl: './my-books.component.html',
-  styleUrl: './my-books.component.css',
+  templateUrl: './my-favourite.component.html',
+  styleUrl: './my-favourite.component.css',
 })
-export class MyBooksComponent {}
+export class MyFavouriteComponent {}
