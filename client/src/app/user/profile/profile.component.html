@@ -1,0 +1,89 @@
+<app-breadcrumb />
+<!-- Profile Section Start -->
+<section class="team-details-section fix section-padding">
+
+    <div class="container">
+
+        <div class="team-details-wrapper">
+
+            <div class="team-details-items">
+
+                <div class="details-image wow fadeInUp" data-wow-delay=".3s">
+                    <img src="assets/img/team/details.png" alt="img">
+                </div>
+
+                <div class="details-content wow fadeInUp" data-wow-delay=".5s">
+
+                    <h3>Username: Wade Warren</h3>
+                    <p><b>Email:</b> wade@example.com</p>
+
+                    <hr />
+
+                    <p>
+                        <b>Description:</b>
+                        Morbi cursus enim in consequat suscipit. Quisque id dui ante.
+                        Praesent auctor sed velit ac aliquet.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="details-counter-area">
+
+                <div class="counter-items">
+                    <h2><span class="count">4</span></h2>
+                    <p>Books</p>
+                </div>
+
+                <div class="counter-items">
+                    <h2><span class="count">100</span></h2>
+                    <p>Favourite</p>
+                </div>
+
+                <div class="counter-items">
+                    <h2><span class="count">90</span></h2>
+                    <p>Review</p>
+                </div>
+
+            </div>
+
+            <button class="edit-btn">
+                Edit Profile
+            </button>
+
+        </div>
+    </div>
+
+    <!-- EDIT MODE -->
+    <div class="profile-edit" id="profileEdit">
+
+        <form class="edit-form">
+
+            <div class="edit-field">
+                <label>Username</label>
+                <input type="text" value="Wade Warren">
+            </div>
+
+            <div class="edit-field">
+                <label>Email</label>
+                <input type="email" value="wade@example.com">
+            </div>
+
+            <div class="edit-field">
+                <label>Description</label>
+                <textarea>Morbi cursus enim...</textarea>
+            </div>
+
+            <div class="edit-field">
+                <label>Password</label>
+                <input type="password">
+            </div>
+
+            <button type="submit" class="save-btn">Save Changes</button>
+            <button type="button" class="cancel-btn" onclick="showView()">Cancel</button>
+
+        </form>
+
+    </div>
+</section>
