@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { BooksCatalogComponent } from './books-catalog/books-catalog.component';
+import { LoginComponent } from './user/login/login.component';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -10,4 +11,6 @@ export const routes: Routes = [
         { path: '', component: BooksCatalogComponent },
         //{ path: ':bookId', component: CurrentBook, canActivate: [AuthGuard] },
     ] },
+     // User routing
+    { path: 'login', component: LoginComponent },
 ];
