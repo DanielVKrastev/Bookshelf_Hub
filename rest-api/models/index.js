@@ -1,11 +1,11 @@
 const userModel = require('./userModel');
 const tokenBlacklistModel = require('./tokenBlacklistModel');
-const themeModel = require('./themeModel');
-const postModel = require('./postModel');
+const bookModel = require('./bookModel');
+const reviewModel = require('./reviewModel');
 
 module.exports = {
     userModel,
     tokenBlacklistModel,
-    themeModel,
-    postModel,
+    bookModel,
+    reviewModel,
 }
