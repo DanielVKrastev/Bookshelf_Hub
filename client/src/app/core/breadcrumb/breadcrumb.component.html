@@ -3,20 +3,34 @@
     style="background-image: url(assets/img/hero/breadcrumb-bg.jpg);">
     <div class="container">
         <div class="page-heading">
-            <h1>Shop Default</h1>
+            <h1>{{pageName2 || pageName}}</h1>
             <div class="page-header">
                 <ul class="breadcrumb-items wow fadeInUp" data-wow-delay=".3s">
                     <li>
-                        <a href="index.html">
+                        <a routerLink="/home">
                             Home
                         </a>
                     </li>
                     <li>
                         <i class="fa-solid fa-chevron-right"></i>
                     </li>
+                    @if(pageName2 !== ''){
                     <li>
-                        Shop Default
+                        <a [routerLink]="pageNameUrl">
+                            {{pageName}}
+                        </a>
                     </li>
+                    <li>
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </li>
+                    <li>
+                        {{pageName2}}
+                    </li>
+                    } @else {
+                    <li>
+                        {{pageName}}
+                    </li>
+                    }
                 </ul>
             </div>
         </div>
