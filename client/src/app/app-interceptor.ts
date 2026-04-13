@@ -1,6 +1,6 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 import { environment } from '../environments/environment.development';
-import { catchError } from 'rxjs';
+import { catchError, throwError } from 'rxjs';
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -27,7 +27,7 @@ export const appInterceptor: HttpInterceptorFn = (req, next) => {
        // router.navigate(['/404']);
       }
 
-      return [err];
+      return throwError(() => err);
     })
   );
 };
