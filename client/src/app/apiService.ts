@@ -1,0 +1,62 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Review } from './types/review';
+import { Book } from './types/book';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class ApiService {
+  constructor(private http: HttpClient) {}
+
+  getReviews(limit?: number) {
+
+    let url = `/api/reviews`;
+    if (limit) {
+      url += `?limit=${limit}`;
+    }
+    return this.http.get<Review[]>(url);
+  }
+
+  getBooks(limit?: number) {
+
+    let url = `/api/books`;
+    if (limit) {
+      url += `?limit=${limit}`;
+    }
+
+    return this.http.get<Book[]>(url);
+  }
+
+  getSingleBook(id: string) {
+    return this.http.get<Book>(`/api/books/${id}`);
+  }
+
+  createBook(bookName: string, reviewText: string) {
+    const payload = { bookName, reviewText }
+    return this.http.post<Book>(`/api/books`, payload);
+  }
+
+  //CRUD operations
+  //Update book
+  updateBook(bookId: string, bookName: string, reviewText: string) {
+    const payload = { bookName, reviewText }
+    return this.http.put<Book>(`/api/books/${bookId}`, payload);
+  }
+
+  //Delete book - http.delete book ID
+  deleteBook(bookId: string) {
+    return this.http.delete<Book>(`/api/books/${bookId}`);
+  }
+
+  //Update Review book
+  updateReview(bookId: string, reviewId: string,) {
+    const payload = {}
+    return this.http.put<Book>(`/api/books/${bookId}/reviews/${reviewId}`, payload);
+  }
+
+  //Delete review from book - http.delete book ID review ID
+  deleteReview(bookId: string, reviewId: string,) {
+    return this.http.delete<Book>(`/api/books/${bookId}/reviews/${reviewId}`);
+  }
+}
