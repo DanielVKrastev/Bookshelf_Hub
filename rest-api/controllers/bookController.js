@@ -86,6 +86,9 @@ function getBook(req, res, next) {
 
     bookModel.aggregate([
         {
+            $match: { _id: id }
+        },
+        {
             $lookup: {
                 from: "users",
                 localField: "ownerId",
