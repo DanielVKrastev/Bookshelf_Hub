@@ -13,6 +13,7 @@ export interface Book {
     ownerId: User,
     favourites: string[],
     reviews: Review[],
+    imageUrl: string,
     created_at: string,
     __v: number
 }

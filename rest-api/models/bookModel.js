@@ -34,6 +34,9 @@ const bookSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    imageUrl: {
+        type: String,
+    },
     ownerId: {
         type: ObjectId,
         ref: "User"
