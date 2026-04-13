@@ -21,10 +21,12 @@ export const routes: Routes = [
      // User routing
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
-    { path: 'profile', component: ProfileComponent },
-    { path: 'my-books', component: MyBooksComponent },
-    { path: 'my-favourite', component: MyFavouriteComponent },
-    { path: 'my-reviews', component: MyReviewsComponent },
+    { path: 'profile', children: [
+        { path: '', component: ProfileComponent },
+        { path: 'my-books',  component: MyBooksComponent },
+        { path: 'my-favourite', component: MyFavouriteComponent },
+        { path: 'my-reviews', component: MyReviewsComponent },
+    ] },
     { path: 'add-book', 
         component: AddBookComponent
         //loadComponent: () => import('./theme/add-theme/add-theme').then((c) => c.AddTheme), //lazy loading
