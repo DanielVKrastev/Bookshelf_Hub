@@ -5,6 +5,6 @@ const { reviewController } = require('../controllers');
 
 // middleware that is specific to this router
 
-router.put('/:reviewId', auth(), reviewController.like);
+router.get('/', reviewController.getLatestReviews);
 
 module.exports = router
