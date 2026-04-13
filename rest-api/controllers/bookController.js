@@ -2,8 +2,11 @@ const { bookModel } = require('../models');
 const { newReview } = require('./reviewController');
 
 function getBooks(req, res, next) {
+    const limit = Number(req.query.limit) || 0;
+
     bookModel.find()
         .populate('owner')
+        .limit(limit)
         .then(books => res.json(books))
         .catch(next);
 }
