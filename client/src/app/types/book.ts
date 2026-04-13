@@ -12,6 +12,8 @@ export interface Book {
     language: string,
     country: string,
     ownerId: User,
+    owner: User,
+    description: string,
     favourites: string[],
     reviews: Review[],
     imageUrl: string,

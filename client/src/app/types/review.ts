@@ -6,6 +6,7 @@ export interface Review {
     text: string,
     rating: number,
     ownerId: User,
+    owner: User,
     bookId: Book,
     created_at: string,
     __v: number

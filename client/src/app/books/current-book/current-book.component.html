@@ -1,4 +1,4 @@
-<app-breadcrumb pageName="Books" pageNameUrl="/books-catalog" pageName2="Caste The Sky"/>
+<app-breadcrumb pageName="Books" pageNameUrl="/books-catalog" pageName2="Caste The Sky" />
 <!-- Book Details Section Start -->
 <section class="shop-details-section fix section-padding">
     <div class="container">
@@ -9,70 +9,69 @@
                         <div class="tab-content">
                             <div id="thumb1" class="tab-pane fade show active">
                                 <div class="shop-details-thumb">
-                                    <img src="assets/img/shop-details/01.png" alt="img">
+                                    <img [src]="book.imageUrl || 'assets/img/book/02.png'" alt="img">
                                 </div>
                             </div>
-                        </div> 
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-7">
                     <div class="shop-details-content">
                         <div class="title-wrapper">
-                            <h2>Castle The Sky</h2>
+                            <h2>{{book.title}}</h2>
                         </div>
                         <div class="star">
-                            <a routerLink="/"> <i class="fas fa-star"></i></a>
-                            <a routerLink="/"><i class="fas fa-star"></i></a>
-                            <a routerLink="/"> <i class="fas fa-star"></i></a>
-                            <a routerLink="/"><i class="fas fa-star"></i></a>
-                            <a routerLink="/"><i class="fa-regular fa-star"></i></a>
-                            <span>(1 Customer Reviews)</span>
+                            @for (star of getStars(book.averageRating); track $index) {
+                                <a><i
+                                    class="fas"
+                                    [class.fa-star]="star"
+                                    [class.fa-regular]="!star">
+                                </i></a>
+                            }
+                            <span>({{book.reviewsCount}} Customer Reviews)</span>
                         </div>
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec pulvinar, tortor quis
-                            varius pretium est felis scelerisque nulla, vitae placerat justo nunc a massa. Aenean
-                            nec montes vestibulum urna vel imperdiet ipsum. Orci varius natoque penatibus et magnis
-                            dis ridicul parturient montes.
+                            {{book.description}}
                         </p>
                         <div class="cart-wrapper">
                             <button type="button" class="theme-btn style-2">
                                 <i class="far fa-heart"></i>
                                 Add to Favourite
                             </button>
-                            <a href="shop-details.html" class="theme-btn">Add Review</a>
+                            <a routerLink="/" class="theme-btn">Add Review</a>
                         </div>
                         <div class="category-box">
                             <div class="category-list">
                                 <ul>
                                     <li>
-                                        <span>Author:</span> blablablablal
+                                        <span>Author:</span> {{book.author}}
                                     </li>
                                     <li>
-                                        <span>Category:</span> Kids Toys
-                                    </li>
-                                </ul>
-                                <ul>
-                                    <li>
-                                        <span>Total page:</span> 330
-                                    </li>
-                                    <li>
-                                        <span>Language:</span> English
+                                        <span>Category:</span> {{book.category}}
                                     </li>
                                 </ul>
                                 <ul>
                                     <li>
-                                        <span>Publish Years:</span> 2021
+                                        <span>Total page:</span> {{book.totalPage}}
                                     </li>
                                     <li>
-                                        <span>Century:</span> United States
+                                        <span>Language:</span> {{book.language}}
                                     </li>
                                 </ul>
                                 <ul>
                                     <li>
-                                        <span>Publisher:</span> blablbalba
+                                        <span>Publish Years:</span> {{book.publishYear}}
                                     </li>
                                     <li>
-                                        
+                                        <span>Century:</span> {{book.country}}
+                                    </li>
+                                </ul>
+                                <ul>
+                                    <li>
+                                        <span>Publisher:</span> {{book.publisher}}
+                                    </li>
+                                    <li>
+
                                     </li>
                                 </ul>
                             </div>
@@ -80,43 +79,50 @@
                     </div>
                 </div>
             </div>
+
+
+            <!-- Reviews -->
             <div class="single-tab section-padding pb-0">
                 <ul class="nav mb-5" role="tablist">
                     <li class="nav-item " role="presentation">
                         <div class="nav-link ps-0 active">
-                            <h6>reviews (3)</h6>
+                            <h6>reviews ({{book.reviewsCount}})</h6>
                         </div>
                     </li>
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane fade show active" role="tabpanel">
                         <div class="review-items">
-                            <div class="review-wrap-area d-flex gap-4">
-                                <div class="review-thumb">
-                                    <img src="assets/img/shop-details/review.png" alt="img">
-                                </div>
-                                <div class="review-content">
-                                    <div
-                                        class="head-area d-flex flex-wrap gap-2 align-items-center justify-content-between">
-                                        <div class="cont">
-                                            <h5><a href="news-details.html">Leslie Alexander</a></h5>
-                                            <span>February 10, 2024 at 2:37 pm</span>
-                                        </div>
-                                        <div class="star">
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-regular fa-star"></i>
-                                        </div>
+                            @for (review of book.reviews; track $index) {
+                                <div class="review-wrap-area d-flex gap-4">
+                                    <div class="review-thumb">
+                                        <img src="assets/img/shop-details/review.png" alt="img">
                                     </div>
-                                    <p class="mt-30 mb-4">
-                                        Neque porro est qui dolorem ipsum quia quaed inventor veritatis et quasi
-                                        architecto var sed efficitur turpis gilla sed sit amet finibus eros. Lorem
-                                        Ipsum is <br> simply dummy
-                                    </p>
+                                    <div class="review-content">
+                                        <div
+                                            class="head-area d-flex flex-wrap gap-2 align-items-center justify-content-between">
+                                            <div class="cont">
+                                                <h5>{{review.owner.username}}</h5>
+                                                <span>{{review.created_at | date: 'yyyy-mm-dd hh:mm'}}</span>
+                                            </div>
+                                            <div class="star">
+                                            @for (star of getStars(review.rating); track $index) {
+                                                <i
+                                                    class="fa-star"
+                                                    [class.fa-solid]="star"
+                                                    [class.fa-regular]="!star">
+                                                </i>
+                                            }
+                                            </div>
+                                        </div>
+                                        <p class="mt-30 mb-4">
+                                            {{review.text}}
+                                        </p>
+                                    </div>
                                 </div>
-                            </div>
+                            }
+
+                            <!-- Review Form-->
                             <div class="review-title mt-5 py-15 mb-30">
                                 <h4>Your Rating*</h4>
                                 <div class="rate-now d-flex align-items-center">
