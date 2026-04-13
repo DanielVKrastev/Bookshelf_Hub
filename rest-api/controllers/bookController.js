@@ -63,6 +63,36 @@ function createBook(req, res, next) {
         .catch(next);
 }
 
+function deleteBook(req, res, next) {
+    const { bookId } = req.params;
+    const { _id: userId } = req.user;
+
+    Promise.all([
+        // delete book (if owner is that user)
+        bookModel.findOneAndDelete({
+            _id: bookId,
+            ownerId: userId
+        }),
+
+        // remove the book book from user.books
+        userModel.findOneAndUpdate(
+            { _id: userId },
+            { $pull: { books: bookId } }
+        ),
+
+        // remove all reviews from this book
+        reviewModel.deleteMany({ bookId })
+    ])
+        .then(([deletedBook]) => {
+            if (deletedBook) {
+                res.status(200).json(deletedBook);
+            } else {
+                res.status(401).json({ message: 'Not allowed!' });
+            }
+        })
+        .catch(next);
+}
+
 //likes
 function favourite(req, res, next) {
     const { bookId } = req.params;
@@ -81,5 +111,6 @@ module.exports = {
     getBooks,
     getBook,
     createBook,
+    deleteBook,
     favourite,
 };
