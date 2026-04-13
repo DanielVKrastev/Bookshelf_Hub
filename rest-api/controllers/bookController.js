@@ -1,6 +1,8 @@
 const { bookModel } = require('../models');
 const { newReview } = require('./reviewController');
+const mongoose = require('mongoose');
 
+/*
 function getBooks(req, res, next) {
     const limit = Number(req.query.limit) || 0;
 
@@ -9,8 +11,55 @@ function getBooks(req, res, next) {
         .limit(limit)
         .then(books => res.json(books))
         .catch(next);
+*/
+
+function getBooks(req, res, next) {
+    const limit = Number(req.query.limit) || 0;
+
+    bookModel.aggregate([
+        {
+            $lookup: {
+                from: "reviews",
+                localField: "_id",
+                foreignField: "bookId",
+                as: "reviews"
+            }
+        },
+        {
+            $lookup: {
+                from: "users",
+                localField: "ownerId",
+                foreignField: "_id",
+                as: "owner"
+            }
+        },
+        {
+            $addFields: {
+                reviewsCount: { $size: "$reviews" },
+                averageRating: {
+                    $cond: [
+                        { $eq: [{ $size: "$reviews" }, 0] },
+                        0,
+                        { $avg: "$reviews.rating" }
+                    ]
+                }
+            }
+        },
+        {
+            $unwind: {
+                path: "$owner",
+                preserveNullAndEmptyArrays: true
+            }
+        },
+
+        // 📏 limit (IMPORTANT: after calculations is fine for small apps)
+        ...(limit ? [{ $limit: limit }] : [])
+    ])
+    .then(books => res.json(books))
+    .catch(next);
 }
 
+/*
 function getBook(req, res, next) {
     const { bookId } = req.params;
 
@@ -23,6 +72,54 @@ function getBook(req, res, next) {
         })
         .then(book => res.json(book))
         .catch(next);
+}
+*/
+
+function getBook(req, res, next) {
+    const { bookId } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(bookId)) {
+        return res.status(400).json({ message: "Invalid bookId" });
+    }
+
+    const id = new mongoose.Types.ObjectId(bookId);
+
+    bookModel.aggregate([
+        { $match: { _id: id } },
+
+        {
+            $lookup: {
+                from: "reviews",
+                localField: "_id",
+                foreignField: "bookId",
+                as: "reviews"
+            }
+        },
+
+        {
+            $lookup: {
+                from: "users",
+                localField: "ownerId",
+                foreignField: "_id",
+                as: "owner"
+            }
+        },
+
+        {
+            $addFields: {
+                reviewsCount: { $size: "$reviews" },
+                averageRating: {
+                    $cond: [
+                        { $eq: [{ $size: "$reviews" }, 0] },
+                        0,
+                        { $avg: "$reviews.rating" }
+                    ]
+                }
+            }
+        }
+    ])
+    .then(book => res.json(book[0] || null))
+    .catch(next);
 }
 
 function createBook(req, res, next) {

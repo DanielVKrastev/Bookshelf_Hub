@@ -41,6 +41,12 @@ const bookSchema = new mongoose.Schema({
         type: ObjectId,
         ref: "User"
     },
+    averageRating: {
+        type: Number
+    },
+    reviewsCount: {
+        type: Number,
+    },
     favourites: {
         type: [ObjectId],
         ref: "User",
