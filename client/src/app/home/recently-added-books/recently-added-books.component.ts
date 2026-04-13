@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { RouterLink } from "@angular/router";
+import { Book } from '../../types/book';
+import { ApiService } from '../../apiService';
 
 @Component({
   selector: 'app-recently-added-books',
@@ -7,4 +9,23 @@ import { RouterLink } from "@angular/router";
   templateUrl: './recently-added-books.component.html',
   styleUrl: './recently-added-books.component.css',
 })
-export class RecentlyAddedBooksComponent {}
+export class RecentlyAddedBooksComponent implements OnInit {
+  books: Book[] = [];
+  isLoading = true;
+
+  constructor(private apiService: ApiService, private cd: ChangeDetectorRef) { }
+
+  ngOnInit(): void {
+    this.apiService.getBooks(4).subscribe(books => {
+      console.log(books);
+
+      this.books = books;
+      this.cd.detectChanges();
+    })
+  }
+
+  getStars(rating: number) {
+    return Array.from({ length: 5 }, (_, i) => i < Math.round(rating));
+  }
+}
+
