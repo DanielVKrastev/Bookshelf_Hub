@@ -17,8 +17,6 @@ export class RecentlyAddedBooksComponent implements OnInit {
 
   ngOnInit(): void {
     this.apiService.getBooks(4).subscribe(books => {
-      console.log(books);
-
       this.books = books;
       this.cd.detectChanges();
     })
