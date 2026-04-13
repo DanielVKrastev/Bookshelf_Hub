@@ -1,7 +1,7 @@
 export interface User {
+    _id: string,
     books: string[],
     reviews: string[],
-    _id: string,
     tel: string,
     email: string,
     username: string,
