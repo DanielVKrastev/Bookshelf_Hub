@@ -55,8 +55,8 @@ function getBooks(req, res, next) {
         // 📏 limit (IMPORTANT: after calculations is fine for small apps)
         ...(limit ? [{ $limit: limit }] : [])
     ])
-    .then(books => res.json(books))
-    .catch(next);
+        .then(books => res.json(books))
+        .catch(next);
 }
 
 /*
@@ -85,17 +85,6 @@ function getBook(req, res, next) {
     const id = new mongoose.Types.ObjectId(bookId);
 
     bookModel.aggregate([
-        { $match: { _id: id } },
-
-        {
-            $lookup: {
-                from: "reviews",
-                localField: "_id",
-                foreignField: "bookId",
-                as: "reviews"
-            }
-        },
-
         {
             $lookup: {
                 from: "users",
@@ -105,6 +94,59 @@ function getBook(req, res, next) {
             }
         },
 
+        // REVIEWS
+        {
+            $lookup: {
+                from: "reviews",
+                localField: "_id",
+                foreignField: "bookId",
+                as: "reviews"
+            }
+        },
+
+        // OWNER for review (nested lookup)
+        {
+            $lookup: {
+                from: "users",
+                localField: "reviews.ownerId",
+                foreignField: "_id",
+                as: "reviewOwners"
+            }
+        },
+
+        // connect review + owner
+        {
+            $addFields: {
+                reviews: {
+                    $map: {
+                        input: "$reviews",
+                        as: "review",
+                        in: {
+                            _id: "$$review._id",
+                            text: "$$review.text",
+                            rating: "$$review.rating",
+                            created_at: "$$review.created_at",
+
+                            // owner for all review
+                            owner: {
+                                $arrayElemAt: [
+                                    {
+                                        $filter: {
+                                            input: "$reviewOwners",
+                                            as: "u",
+                                            cond: { $eq: ["$$u._id", "$$review.ownerId"] }
+                                        }
+                                    },
+                                    0
+                                ]
+                            }
+                        }
+                    }
+                }
+            }
+        },
+
+        // rating + count
         {
             $addFields: {
                 reviewsCount: { $size: "$reviews" },
@@ -116,10 +158,17 @@ function getBook(req, res, next) {
                     ]
                 }
             }
+        },
+
+        // clean helper array
+        {
+            $project: {
+                reviewOwners: 0
+            }
         }
     ])
-    .then(book => res.json(book[0] || null))
-    .catch(next);
+        .then(book => res.json(book[0] || null))
+        .catch(next);
 }
 
 function createBook(req, res, next) {
