@@ -7,26 +7,60 @@
             <p>Register to access your account</p>
         </div>
 
-        <form class="register-form">
+        <form class="register-form" #form="ngForm" (ngSubmit)="register(form)">
 
             <div class="register-field">
                 <label>Username *</label>
-                <input type="text" name="username">
+                <input 
+                    type="text" 
+                    name="username"
+                    id="username"
+                    placeholder="User"
+                    ngModel
+                    #inputUsername="ngModel"
+                    required
+                >
             </div>
 
             <div class="register-field">
                 <label>Email Address *</label>
-                <input type="email" name="email">
+                <input 
+                    type="email" 
+                    name="email"
+                    id="email"
+                    placeholder="danielk@gmail.com"
+                    ngModel
+                    #inputEmail="ngModel"
+                    required
+                >
             </div>
 
             <div class="register-field">
                 <label>Password *</label>
-                <input type="password" name="password">
+                <input 
+                    type="password" 
+                    name="password"
+                    id="password" 
+                    placeholder="******"
+                    #inputPassword="ngModel" 
+                    ngModel 
+                    minlength="5"
+                    required
+                >
             </div>
 
             <div class="register-field">
                 <label>Confirm Password *</label>
-                <input type="password" name="confirm_password">
+                <input 
+                    type="password" 
+                    name="rePassword"
+                    id="rePassword" 
+                    placeholder="******"
+                    #inputrePassword="ngModel" 
+                    ngModel 
+                    minlength="5"
+                    required
+                >
             </div>
 
             <button class="register-btn" type="submit">

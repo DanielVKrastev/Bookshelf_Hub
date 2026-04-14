@@ -18,7 +18,7 @@ export class UserService {
     return !!this.user;
   }
 
-  constructor(private http: HttpClient){
+  constructor(private http: HttpClient) {
     this.userSubscription = this.user$.subscribe((user) => {
       this.user = user;
     })
@@ -26,7 +26,13 @@ export class UserService {
 
   login(email: string, password: string) {
     return this.http
-            .post<UserForAuth>('/api/login', { email, password })
-            .pipe(tap((user) => this.user$$.next(user)));
+      .post<UserForAuth>('/api/login', { email, password })
+      .pipe(tap((user) => this.user$$.next(user)));
+  }
+
+  register(username: string, email: string, tel: string, password: string, rePassword: string) {
+    return this.http
+      .post<UserForAuth>('/api/register', { username, email, tel, password, rePassword })
+      .pipe(tap((user) => this.user$$.next(user)));
   }
 }

@@ -49,6 +49,7 @@
     border-radius:6px;
     font-size:14px;
     transition:0.3s;
+    color: black;
 }
 
 .register-field input:focus{
