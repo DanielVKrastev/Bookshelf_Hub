@@ -1,0 +1,1 @@
+export const EMAIL_DOMAINS = ['bg', 'com', 'uk', 'co.uk', 'ru', 'fr', 'org'];
