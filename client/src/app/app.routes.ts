@@ -10,6 +10,7 @@ import { MyFavouriteComponent } from './user/my-favourite/my-favourite.component
 import { MyReviewsComponent } from './user/my-reviews/my-reviews.component';
 import { CurrentBookComponent } from './books/current-book/current-book.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { AuthGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -17,22 +18,25 @@ export const routes: Routes = [
     // Book routing
     { path: 'books-catalog', children: [
         { path: '', component: BooksCatalogComponent },
-        { path: ':bookId', component: CurrentBookComponent, /*canActivate: [AuthGuard] */},
+        { path: ':bookId', component: CurrentBookComponent },
     ] },
      // User routing
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
-    { path: 'profile', children: [
+    { path: 'profile', canActivate: [AuthGuard], children: [
         { path: '', component: ProfileComponent },
         { path: 'my-books',  component: MyBooksComponent },
         { path: 'my-favourite', component: MyFavouriteComponent },
         { path: 'my-reviews', component: MyReviewsComponent },
     ] },
     { path: 'add-book', 
-        component: AddBookComponent
-        //loadComponent: () => import('./theme/add-theme/add-theme').then((c) => c.AddTheme), //lazy loading
-        //canActivate: [AuthGuard],
+        //component: AddBookComponent,
+        loadComponent: () => import('./books/add-book/add-book.component').then((c) => c.AddBookComponent), //lazy loading
+        canActivate: [AuthGuard],
      },
-    { path: '404', component: PageNotFoundComponent },
+    { path: '404', 
+        //component: PageNotFoundComponent,
+        loadComponent: () => import('./page-not-found/page-not-found.component').then((c) => c.PageNotFoundComponent),
+    },
     { path: '**', redirectTo: '/404' },
 ];
