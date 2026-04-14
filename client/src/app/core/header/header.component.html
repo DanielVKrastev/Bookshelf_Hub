@@ -21,37 +21,39 @@
                                         Books
                                     </a>
                                 </li>
-                                <!--Is not logged in-->
-                                <li>
-                                    <a routerLink="/login">
-                                        Login
-                                    </a>
-                                </li>
-                                <li>
-                                    <a routerLink="/register">
-                                        Register
-                                    </a>
-                                </li>
-
-                                <!--Is logged in-->
-                                <li>
-                                    <a routerLink="/add-book">
-                                        Add Book
-                                    </a>
-                                </li>
-                                <li class="has-dropdown">
-                                    <a routerLink="/profile">
-                                        Profile
-                                        <i class="fas fa-angle-down"></i>
-                                    </a>
-                                    <ul class="submenu">
-                                        <li><a routerLink="/profile">My Profile</a></li>
-                                        <li><a routerLink="/profile/my-books">My Books</a></li>
-                                        <li><a routerLink="/profile/my-favourite">My Favourite</a></li>
-                                        <li><a routerLink="/profile/my-reviews">My Reviews</a></li>
-                                        <li><a routerLink="/logout">Logout</a></li>
-                                    </ul>
-                                </li>
+                                @if(!isLoggedIn){
+                                    <!--Is not logged in-->
+                                    <li>
+                                        <a routerLink="/login">
+                                            Login
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a routerLink="/register">
+                                            Register
+                                        </a>
+                                    </li>
+                                } @else {
+                                    <!--Is logged in-->
+                                    <li>
+                                        <a routerLink="/add-book">
+                                            Add Book
+                                        </a>
+                                    </li>
+                                    <li class="has-dropdown">
+                                        <a routerLink="/profile">
+                                            Profile
+                                            <i class="fas fa-angle-down"></i>
+                                        </a>
+                                        <ul class="submenu">
+                                            <li><a routerLink="/profile">My Profile</a></li>
+                                            <li><a routerLink="/profile/my-books">My Books</a></li>
+                                            <li><a routerLink="/profile/my-favourite">My Favourite</a></li>
+                                            <li><a routerLink="/profile/my-reviews">My Reviews</a></li>
+                                            <li><a (click)="logout()">Logout</a></li>
+                                        </ul>
+                                    </li>
+                                }
                             </ul>
                         </nav>
                     </div>
