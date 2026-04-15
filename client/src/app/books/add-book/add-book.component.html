@@ -1,6 +1,6 @@
 <app-breadcrumb pageName="Add Book"/>
 <!-- Add book-->
-<form class="book-add-form two-columns">
+<form class="book-add-form two-columns" #form="ngForm" (ngSubmit)="addBook(form)">
 
     <!-- Basic Information -->
     <div class="book-group">
@@ -10,18 +10,18 @@
 
             <div class="book-field">
                 <label>Title *</label>
-                <input type="text" name="title">
+                <input type="text" name="title" id="title" #inputTitle="ngModel" ngModel required>
             </div>
 
             <div class="book-field">
                 <label>Author *</label>
-                <input type="text" name="author">
+                <input type="text" name="author" id="author" #inputAuthor="ngModel" ngModel required>
             </div>
 
             <div class="book-field">
                 <label>Category *</label>
 
-                <select name="category">
+                <select name="category" id="category" #inputCategory="ngModel" ngModel required>
                     <option value="">Select category</option>
                     <option value="fiction">Fiction</option>
                     <option value="non-fiction">Non-Fiction</option>
@@ -45,12 +45,12 @@
 
             <div class="book-field">
                 <label>Language *</label>
-                <input type="text" name="language">
+                <input type="text" name="language" name="language" id="language" #inputLanguage="ngModel" ngModel required>
             </div>
 
             <div class="book-field full">
                 <label>Description</label>
-                <textarea name="description"></textarea>
+                <textarea name="description" name="description" id="description" rows="8" #inputDescription="ngModel" ngModel required minlength="10"></textarea>
             </div>
 
         </div>
@@ -64,22 +64,22 @@
 
             <div class="book-field">
                 <label>Publisher *</label>
-                <input type="text" name="publisher">
+                <input type="text" name="publisher" id="publisher" #inputPublisher="ngModel" ngModel required>
             </div>
 
             <div class="book-field">
-                <label>Publication Date *</label>
-                <input type="date" name="publicationDate">
+                <label>Publication Year *</label>
+                <input type="number" name="publishYear" id="publishYear" #inputPublishYear="ngModel" ngModel required>
             </div>
 
             <div class="book-field">
                 <label>Pages *</label>
-                <input type="number" name="pages">
+                <input type="number" name="totalPage" id="totalPage" #inputTotalPage="ngModel" ngModel required>
             </div>
 
             <div class="book-field">
-                <label>Century *</label>
-                <input type="text" name="century">
+                <label>Country *</label>
+                <input type="text" name="country" id="country" #inputCountry="ngModel" ngModel required >
             </div>
 
         </div>
@@ -90,8 +90,8 @@
         <h3>Book Cover</h3>
 
         <div class="book-field">
-            <label>Upload Cover Image</label>
-            <input type="file" name="coverImage">
+            <label>Cover Image (URL)</label>
+            <input type="text" name="imageUrl" id="imageUrl" #inputImageUrl="ngModel" ngModel required >
         </div>
     </div>
 

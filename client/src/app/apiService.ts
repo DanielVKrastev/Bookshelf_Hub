@@ -32,8 +32,18 @@ export class ApiService {
     return this.http.get<Book>(`/api/books/${id}`);
   }
 
-  createBook(bookName: string, reviewText: string) {
-    const payload = { bookName, reviewText }
+  createBook(
+    author: string, 
+    category: string,
+    country: string, 
+    description: string, 
+    imageUrl: string, 
+    language: string, 
+    publishYear: number, 
+    publisher: string, 
+    title: string, 
+    totalPage: number) {
+    const payload = { author, category, country, description, imageUrl, language, publishYear, publisher, title, totalPage }
     return this.http.post<Book>(`/api/books`, payload);
   }
 
