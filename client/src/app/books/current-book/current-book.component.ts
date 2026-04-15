@@ -58,11 +58,16 @@ export class CurrentBookComponent implements OnInit {
   }
 
   addReview(form: NgForm) {
-    if (form.invalid) {
+    if (form.invalid || !form.value.terms || this.rating === 0) {
       return;
     }
+    console.log(form.value);
+    
 
-    const { text } = (form.value);
+    let { text } = (form.value);
+    if(!text) {
+      text = '(This user hasn’t written any reviews yet.)';
+    }
 
     this.apiService.createReviewForBook(this.book._id, this.rating, text, this.userId as string).subscribe(data => {
       this.loadBook();

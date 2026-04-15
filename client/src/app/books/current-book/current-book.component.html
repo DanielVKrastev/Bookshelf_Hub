@@ -23,10 +23,14 @@
 
                         <div class="star">
                             @for (star of getStars(book.averageRating); track $index) {
-                            <a><i class="fa-star" [class.fa-solid]="star" [class.fa-regular]="!star">
+                            <a [routerLink]="[]" fragment="reviews"><i class="fa-star" [class.fa-solid]="star" [class.fa-regular]="!star">
                                 </i></a>
                             }
-                            <span>({{book.reviewsCount}} Customer Reviews)</span>
+                            <a [routerLink]="[]" fragment="reviews">
+                                <span>({{book.reviewsCount}} Customer Reviews)
+
+                                </span>
+                            </a>
                         </div>
                         <p>
                             {{book.description}}
@@ -36,7 +40,7 @@
                                 <i class="far fa-heart"></i>
                                 Add to Favourite
                             </button>
-                            <a routerLink="/" class="theme-btn">Add Review</a>
+                            <a [routerLink]="[]" fragment="post-review" class="theme-btn">Add Review</a>
                         </div>
                         <br>
                         <div>
@@ -87,7 +91,7 @@
 
 
             <!-- Reviews -->
-            <div class="single-tab section-padding pb-0">
+            <div id="reviews" class="single-tab section-padding pb-0">
                 <ul class="nav mb-5" role="tablist">
                     <li class="nav-item " role="presentation">
                         <div class="nav-link ps-0 active">
@@ -126,7 +130,7 @@
 
                             <!-- Review Form-->
                             <form #form="ngForm" (ngSubmit)="addReview(form)">
-                                <div class="review-title mt-5 py-15 mb-30">
+                                <div id="post-review" class="review-title mt-5 py-15 mb-30">
                                     <h4>Your Rating*</h4>
                                     <div class="rate-now d-flex align-items-center">
                                         <p>Your Rating*</p>
@@ -153,7 +157,7 @@
                                         <div class="col-lg-12 wow fadeInUp animated" data-wow-delay=".9">
                                             <div class="form-check d-flex gap-2 from-customradio">
                                                 <input type="checkbox" class="form-check-input" name="terms"
-                                                    id="terms" required>
+                                                    id="terms" #inputTerms="ngModel" ngModel required>
                                                 <label class="form-check-label" for="terms">
                                                     i accept your terms & conditions
                                                 </label>
