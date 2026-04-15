@@ -15,7 +15,6 @@ export class AddBookComponent {
   constructor(private apiService: ApiService, private router: Router){}
 
   addBook(form: NgForm) {
-    console.log(form);
     if(form.invalid){
       return;
     }
