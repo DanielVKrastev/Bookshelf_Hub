@@ -183,8 +183,9 @@ function createBook(req, res, next) {
         publishYear,
         category,
         language,
-        century,
-        reviewText
+        country,
+        reviewText,
+        imageUrl
     } = req.body;
 
     const { _id: userId } = req.user;
@@ -197,9 +198,11 @@ function createBook(req, res, next) {
         publishYear,
         category,
         language,
-        century,
+        country,
+        ownerId: userId,
         owner: userId,
-        favourites: [userId]
+        favourites: [],
+        imageUrl
     })
         .then(book => {
             if (reviewText) {
