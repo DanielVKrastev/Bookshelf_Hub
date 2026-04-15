@@ -6476,7 +6476,6 @@ span {
   color: var(--text);
   background-color: transparent;
   font-size: 16px;
-  text-transform: capitalize;
   border-radius: 8px;
   font-weight: 500;
 }

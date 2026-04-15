@@ -49,9 +49,9 @@ export class ApiService {
 
   //CRUD operations
   //Update book
-  updateBook(bookId: string, bookName: string, reviewText: string) {
-    const payload = { bookName, reviewText }
-    return this.http.put<Book>(`/api/books/${bookId}`, payload);
+  createReviewForBook(bookId: string, rating: number, text: string, ownerId: string) {
+    const payload = { rating, text, ownerId }
+    return this.http.post<Book>(`/api/books/${bookId}`, payload);
   }
 
   //Delete book - http.delete book ID

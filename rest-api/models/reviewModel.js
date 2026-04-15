@@ -16,7 +16,7 @@ const reviewSchema = new mongoose.Schema({
     ownerId: {
         type: ObjectId,
         ref: "User",
-        //required: true
+        required: true
     },
 
     bookId: {

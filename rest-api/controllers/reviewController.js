@@ -2,7 +2,7 @@ const { userModel, bookModel, reviewModel } = require('../models');
 
 // create
 function newReview(text, rating, userId, bookId) {
-    return reviewModel.create({ text, rating, owner: userId, bookId })
+    return reviewModel.create({ text, rating, ownerId: userId, bookId })
         .then(review => {
             return Promise.all([
                 // add review to user
