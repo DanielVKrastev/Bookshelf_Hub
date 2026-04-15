@@ -25,7 +25,7 @@ export class CurrentBookComponent implements OnInit {
   }
 
   ngOnInit(): void {
-   this.loadBook();
+    this.loadBook();
   }
 
   loadBook() {
@@ -33,6 +33,7 @@ export class CurrentBookComponent implements OnInit {
 
     this.apiService.getSingleBook(bookId).subscribe(book => {
       this.book = book;
+      console.log(this.book);
       this.isLoading = false;
       this.cd.detectChanges();
     });
@@ -61,17 +62,25 @@ export class CurrentBookComponent implements OnInit {
     if (form.invalid || !form.value.terms || this.rating === 0) {
       return;
     }
-    console.log(form.value);
-    
 
     let { text } = (form.value);
-    if(!text) {
+    if (!text) {
       text = '(This user hasn’t written any reviews yet.)';
     }
 
     this.apiService.createReviewForBook(this.book._id, this.rating, text, this.userId as string).subscribe(data => {
       this.loadBook();
-    })
+    });
+  }
+
+  addFavourite() {
+    this.apiService.favouriteForBook(this.book._id, this.userId as string).subscribe(data => {
+      this.loadBook();
+    });
+  }
+
+  checkFavourite(): boolean {
+    return this.book?.favourites?.includes(this.userId as string);
   }
 
 }

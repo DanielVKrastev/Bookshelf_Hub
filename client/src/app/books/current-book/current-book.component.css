@@ -4,3 +4,8 @@
   object-fit: cover;
   border-radius: 8px;
 }
+
+.favourites-count{
+  margin-top: 5px;
+  font-size: 20px;
+}

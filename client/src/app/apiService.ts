@@ -54,6 +54,12 @@ export class ApiService {
     return this.http.post<Book>(`/api/books/${bookId}`, payload);
   }
 
+  favouriteForBook(bookId: string, ownerId: string) {
+    const payload = { ownerId }
+    return this.http.put<Book>(`/api/books/${bookId}`, payload);
+  }
+
+
   //Delete book - http.delete book ID
   deleteBook(bookId: string) {
     return this.http.delete<Book>(`/api/books/${bookId}`);

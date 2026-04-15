@@ -23,7 +23,8 @@
 
                         <div class="star">
                             @for (star of getStars(book.averageRating); track $index) {
-                            <a [routerLink]="[]" fragment="reviews"><i class="fa-star" [class.fa-solid]="star" [class.fa-regular]="!star">
+                            <a [routerLink]="[]" fragment="reviews"><i class="fa-star" [class.fa-solid]="star"
+                                    [class.fa-regular]="!star">
                                 </i></a>
                             }
                             <a [routerLink]="[]" fragment="reviews">
@@ -31,14 +32,23 @@
 
                                 </span>
                             </a>
+                            <div class="favourites-count">
+                                <i class="far fa-heart"></i>
+                                <b> {{book.favourites?.length}}</b>
+                            </div>
+
                         </div>
                         <p>
                             {{book.description}}
                         </p>
                         <div class="cart-wrapper">
-                            <button type="button" class="theme-btn style-2">
+                            <button type="button" class="theme-btn style-2" (click)="addFavourite()">
                                 <i class="far fa-heart"></i>
-                                Add to Favourite
+                                @if(checkFavourite()) {
+                                    Add to Favourites
+                                } @else {
+                                    Already in favorites
+                                }
                             </button>
                             <a [routerLink]="[]" fragment="post-review" class="theme-btn">Add Review</a>
                         </div>
@@ -150,14 +160,14 @@
                                         <div class="col-lg-12 fadeInUp animated" data-wow-delay=".8">
                                             <div class="form-clt">
                                                 <span>Message*</span>
-                                                <textarea name="text" id="text"
-                                                    placeholder="Write Review" id="text" #inputText="ngModel" ngModel></textarea>
+                                                <textarea name="text" id="text" placeholder="Write Review" id="text"
+                                                    #inputText="ngModel" ngModel></textarea>
                                             </div>
                                         </div>
                                         <div class="col-lg-12 wow fadeInUp animated" data-wow-delay=".9">
                                             <div class="form-check d-flex gap-2 from-customradio">
-                                                <input type="checkbox" class="form-check-input" name="terms"
-                                                    id="terms" #inputTerms="ngModel" ngModel required>
+                                                <input type="checkbox" class="form-check-input" name="terms" id="terms"
+                                                    #inputTerms="ngModel" ngModel required>
                                                 <label class="form-check-label" for="terms">
                                                     i accept your terms & conditions
                                                 </label>
