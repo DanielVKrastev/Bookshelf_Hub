@@ -96,7 +96,9 @@ function getBook(req, res, next) {
                 as: "owner"
             }
         },
-
+        {
+            $unwind: "$owner"
+        },
         // REVIEWS
         {
             $lookup: {

@@ -20,13 +20,14 @@
                         <div class="title-wrapper">
                             <h2>{{book.title}}</h2>
                         </div>
+
                         <div class="star">
                             @for (star of getStars(book.averageRating); track $index) {
-                                <a><i
-                                    class="fas"
-                                    [class.fa-star]="star"
-                                    [class.fa-regular]="!star">
-                                </i></a>
+                            <a><i
+                                class="fa-star"
+                                [class.fa-solid]="star"
+                                [class.fa-regular]="!star">
+                            </i></a>
                             }
                             <span>({{book.reviewsCount}} Customer Reviews)</span>
                         </div>
@@ -39,6 +40,13 @@
                                 Add to Favourite
                             </button>
                             <a routerLink="/" class="theme-btn">Add Review</a>
+                        </div>
+                        <br>
+                        <div>
+                            <span class="thumb">
+                                <img src="assets/img/testimonial/client-2.png" alt="img">
+                            </span>
+                            <span class="content"> {{book.owner?.username}}</span>
                         </div>
                         <div class="category-box">
                             <div class="category-list">
@@ -94,32 +102,29 @@
                     <div class="tab-pane fade show active" role="tabpanel">
                         <div class="review-items">
                             @for (review of book.reviews; track $index) {
-                                <div class="review-wrap-area d-flex gap-4">
-                                    <div class="review-thumb">
-                                        <img src="assets/img/shop-details/review.png" alt="img">
-                                    </div>
-                                    <div class="review-content">
-                                        <div
-                                            class="head-area d-flex flex-wrap gap-2 align-items-center justify-content-between">
-                                            <div class="cont">
-                                                <h5>{{review.owner.username}}</h5>
-                                                <span>{{review.created_at | date: 'yyyy-mm-dd hh:mm'}}</span>
-                                            </div>
-                                            <div class="star">
-                                            @for (star of getStars(review.rating); track $index) {
-                                                <i
-                                                    class="fa-star"
-                                                    [class.fa-solid]="star"
-                                                    [class.fa-regular]="!star">
-                                                </i>
-                                            }
-                                            </div>
-                                        </div>
-                                        <p class="mt-30 mb-4">
-                                            {{review.text}}
-                                        </p>
-                                    </div>
+                            <div class="review-wrap-area d-flex gap-4">
+                                <div class="review-thumb">
+                                    <img src="assets/img/shop-details/review.png" alt="img">
                                 </div>
+                                <div class="review-content">
+                                    <div
+                                        class="head-area d-flex flex-wrap gap-2 align-items-center justify-content-between">
+                                        <div class="cont">
+                                            <h5>{{review.owner.username}}</h5>
+                                            <span>{{review.created_at | date: 'yyyy-mm-dd hh:mm'}}</span>
+                                        </div>
+                                        <div class="star">
+                                            @for (star of getStars(review.rating); track $index) {
+                                            <i class="fa-star" [class.fa-solid]="star" [class.fa-regular]="!star">
+                                            </i>
+                                            }
+                                        </div>
+                                    </div>
+                                    <p class="mt-30 mb-4">
+                                        {{review.text}}
+                                    </p>
+                                </div>
+                            </div>
                             }
 
                             <!-- Review Form-->
