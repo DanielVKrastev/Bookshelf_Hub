@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from "@angular/router";
 import { UserService } from '../../user/user.service';
 
@@ -14,7 +14,7 @@ export class HeaderComponent {
     return this.userService.isLogged;
   }
 
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(private userService: UserService, private router: Router, private cd: ChangeDetectorRef) { }
 
   logout() {
     this.userService.logout().subscribe(() => {

@@ -21,13 +21,8 @@ export class CurrentBookComponent implements OnInit{
 
   ngOnInit(): void {
     const bookId = (this.route.snapshot.params['bookId']);
-    console.log(bookId);
     
-    this.apiService.getSingleBook(bookId).subscribe(book => {
-      console.log(bookId);
-      console.log(book);
-      
-      
+    this.apiService.getSingleBook(bookId).subscribe(book => {  
       this.book = book;
       this.isLoading = false;
       this.cd.detectChanges();

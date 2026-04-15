@@ -20,8 +20,7 @@ export class TopRatingBooksComponent implements OnInit {
       const sortedBooksRating = books.sort((a: Book, b: Book) => {
         return b.averageRating - a.averageRating;
       });
-      console.log(sortedBooksRating);
-
+      
       this.books = sortedBooksRating.slice(0, 6);
       this.cd.detectChanges();
     })
