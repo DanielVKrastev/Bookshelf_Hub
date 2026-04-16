@@ -23,7 +23,6 @@ export class MyBooksComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.user);
     this.books = this.userService.user?.books || [];
     this.isLoading = false;
   }
