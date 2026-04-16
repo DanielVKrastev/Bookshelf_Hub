@@ -1,7 +1,10 @@
+import { Book } from "./book";
+import { Review } from "./review";
+
 export interface User {
     _id: string,
-    books: string[],
-    reviews: string[],
+    books: Book[],
+    reviews: Review[],
     email: string,
     username: string,
     password: string,
@@ -24,6 +27,6 @@ export interface ProfileDetails{
     email: string,
     imageUrl: string,
     description: string,
-    books: string[],
-    reviews: string[]
+    books: Book[],
+    reviews: Review[]
 }

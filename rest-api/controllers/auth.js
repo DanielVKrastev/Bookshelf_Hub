@@ -88,8 +88,33 @@ function logout(req, res) {
 function getProfileInfo(req, res, next) {
     const { _id: userId } = req.user;
 
-    userModel.findOne({ _id: userId }, { password: 0, __v: 0 }) //finding by Id and returning without password and __v
-        .then(user => { res.status(200).json(user) })
+    userModel.findOne({ _id: userId })
+        .populate('books')
+        .populate('reviews')
+        .then(user => {
+
+            const booksWithRating = user.books.map(book => {
+                const bookReviews = user.reviews.filter(r =>
+                    r.bookId.toString() === book._id.toString()
+                );
+
+                const avg =
+                    bookReviews.length === 0
+                        ? 0
+                        : bookReviews.reduce((a, b) => a + b.rating, 0) / bookReviews.length;
+
+                return {
+                    ...book.toObject(),
+                    averageRating: avg,
+                    reviewsCount: bookReviews.length
+                };
+            });
+
+            res.json({
+                ...user.toObject(),
+                books: booksWithRating
+            });
+        })
         .catch(next);
 }
 
