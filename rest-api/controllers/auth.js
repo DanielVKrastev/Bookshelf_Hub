@@ -14,7 +14,7 @@ const removePassword = (data) => {
 
 function register(req, res, next) {
     const { tel, email, username, password, repeatPassword } = req.body;
-    const imageUrl = '';
+    const imageUrl = 'https://jeffjbutler.com//wp-content/uploads/2018/01/default-user.png';
     const description = '';
     return userModel.create({ tel, email, username, password, imageUrl, description })
         .then((createdUser) => {
@@ -95,9 +95,9 @@ function getProfileInfo(req, res, next) {
 
 function editProfileInfo(req, res, next) {
     const { _id: userId } = req.user;
-    const { tel, username, email } = req.body;
+    const { tel, username, email, imageUrl, description } = req.body;
 
-    userModel.findOneAndUpdate({ _id: userId }, { tel, username, email }, { runValidators: true, new: true })
+    userModel.findOneAndUpdate({ _id: userId }, { tel, username, email, imageUrl, description }, { runValidators: true, new: true })
         .then(x => { res.status(200).json(x) })
         .catch(next);
 }

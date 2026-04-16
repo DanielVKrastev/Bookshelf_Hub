@@ -62,6 +62,17 @@ initUser() {
   );
 }
 
+updateProfile(username: string, email: string, imageUrl?: string, description?: string){
+  return this.http
+    .put<UserForAuth>('/api/users/profile', {
+      username,
+      email,
+      imageUrl,
+      description
+    })
+    .pipe(tap((user) => this.user$$.next(user)));;
+}
+
   ngOnDestroy(): void {
     this.userSubscription?.unsubscribe();
   }

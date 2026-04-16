@@ -2,10 +2,11 @@ export interface User {
     _id: string,
     books: string[],
     reviews: string[],
-    tel?: string,
     email: string,
     username: string,
     password: string,
+    description: string,
+    imageUrl: string,
     created_at: string,
     updatedAt: string,
     __v: number
@@ -14,13 +15,15 @@ export interface User {
 export interface UserForAuth extends User {
     username: string;
     email: string;
-    tel?: string;
     password: string;
     id: string;
 }
 
-export interface ProfileDetails {
+export interface ProfileDetails{
     username: string,
     email: string,
-    tel: string,
+    imageUrl: string,
+    description: string,
+    books: string[],
+    reviews: string[]
 }
