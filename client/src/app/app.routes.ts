@@ -24,7 +24,9 @@ export const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
     { path: 'profile', canActivate: [AuthGuard], children: [
-        { path: '', component: ProfileComponent },
+        { path: '', 
+            loadComponent: () => import('./user/profile/profile.component').then((c) => c.ProfileComponent),
+         },
         { path: 'my-books',  component: MyBooksComponent },
         { path: 'my-favourite', component: MyFavouriteComponent },
         { path: 'my-reviews', component: MyReviewsComponent },

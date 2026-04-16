@@ -1,4 +1,4 @@
-const { bookModel } = require('../models');
+const { bookModel, userModel } = require('../models');
 const { newReview } = require('./reviewController');
 const mongoose = require('mongoose');
 
@@ -202,19 +202,28 @@ function createBook(req, res, next) {
         language,
         country,
         ownerId: userId,
-        owner: userId,
         favourites: [],
         imageUrl
     })
-        .then(book => {
-            if (reviewText) {
-                newReview(reviewText, userId, book._id)
-                    .then(([_, updatedBook]) => res.status(200).json(updatedBook))
-            } else {
-                res.status(200).json(book);
-            }
-        })
-        .catch(next);
+    .then(book => {
+
+        return userModel.findByIdAndUpdate(
+            userId,
+            { $push: { books: book._id } },
+            { new: true }
+        )
+        .then(() => book);
+    })
+    .then(book => {
+
+        if (reviewText) {
+            return newReview(reviewText, userId, book._id)
+                .then(([_, updatedBook]) => res.status(200).json(updatedBook));
+        }
+
+        res.status(200).json(book);
+    })
+    .catch(next);
 }
 
 function deleteBook(req, res, next) {

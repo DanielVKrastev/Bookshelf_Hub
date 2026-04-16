@@ -2,7 +2,7 @@ export interface User {
     _id: string,
     books: string[],
     reviews: string[],
-    tel: string,
+    tel?: string,
     email: string,
     username: string,
     password: string,
@@ -11,7 +11,7 @@ export interface User {
     __v: number
 }
 
-export interface UserForAuth {
+export interface UserForAuth extends User {
     username: string;
     email: string;
     tel?: string;

@@ -14,8 +14,9 @@ const removePassword = (data) => {
 
 function register(req, res, next) {
     const { tel, email, username, password, repeatPassword } = req.body;
-
-    return userModel.create({ tel, email, username, password })
+    const imageUrl = '';
+    const description = '';
+    return userModel.create({ tel, email, username, password, imageUrl, description })
         .then((createdUser) => {
             createdUser = bsonToJson(createdUser);
             createdUser = removePassword(createdUser);

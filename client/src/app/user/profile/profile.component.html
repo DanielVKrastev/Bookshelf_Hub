@@ -14,8 +14,8 @@
 
                 <div class="details-content wow fadeInUp" data-wow-delay=".5s">
 
-                    <h3>Username: Wade Warren</h3>
-                    <p><b>Email:</b> wade@example.com</p>
+                    <h3>Username: {{user?.username}}</h3>
+                    <p><b>Email:</b> {{user?.email}}</p>
 
                     <hr />
 
@@ -32,17 +32,20 @@
             <div class="details-counter-area">
 
                 <div class="counter-items">
-                    <h2><span class="count">4</span></h2>
-                    <p>Books</p>
+                    <h2><span class="count">{{user?.books?.length}}</span></h2>
+                    <p>@if (user?.books?.length === 1) { Book } @else { Books }</p>
                 </div>
-
+                
                 <div class="counter-items">
+                    <!-- TODO
                     <h2><span class="count">100</span></h2>
                     <p>Favourite</p>
+                    -->
                 </div>
+                
 
                 <div class="counter-items">
-                    <h2><span class="count">90</span></h2>
+                    <h2><span class="count">{{user?.reviews?.length}}</span></h2>
                     <p>Review</p>
                 </div>
 

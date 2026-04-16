@@ -20,11 +20,11 @@ export const appInterceptor: HttpInterceptorFn = (req, next) => {
   return next(req).pipe(
     catchError((err) => {
       if(err.status === 401) {
-        // navigate to login
-        router.navigate(['/login']);
+        // navigate to home
+        router.navigate(['/home']);
       } else {
         console.log('ERROR', err);
-       // router.navigate(['/404']);
+        router.navigate(['/404']);
       }
 
       return throwError(() => err);
