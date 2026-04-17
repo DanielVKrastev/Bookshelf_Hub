@@ -24,11 +24,21 @@
                             Explore Books <i class="fa-solid fa-arrow-right-long"></i>
                         </button>
                     </a>
-                    <a routerLink="/register">
-                        <button class="theme-btn style-2 wow fadeInUp" data-wow-delay="1s">
-                            Join Now <i class="fa-solid fa-arrow-right-long"></i>
-                        </button>
-                    </a>
+                    
+                    @if (!isLoggedIn) {
+                        <a routerLink="/register">
+                            <button class="theme-btn style-2 wow fadeInUp" data-wow-delay="1s">
+                                Join Now <i class="fa-solid fa-arrow-right-long"></i>
+                            </button>
+                        </a>
+                    }@else {
+                        <a routerLink="/profile">
+                            <button class="theme-btn style-2 wow fadeInUp" data-wow-delay="1s">
+                                My Profile <i class="fa-solid fa-arrow-right-long"></i>
+                            </button>
+                        </a>
+                    }
+
                 </div>
 
                 <div class="girl-img">
