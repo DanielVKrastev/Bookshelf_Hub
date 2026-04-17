@@ -51,7 +51,7 @@ function editReview(req, res, next) {
     const { _id: userId } = req.user;
 
     reviewModel.findOneAndUpdate(
-        { _id: reviewId, owner: userId },
+        { _id: reviewId, ownerId: userId },
         { text, rating },
         { new: true }
     )
@@ -71,7 +71,7 @@ function deleteReview(req, res, next) {
     const { _id: userId } = req.user;
 
     Promise.all([
-        reviewModel.findOneAndDelete({ _id: reviewId, owner: userId }),
+        reviewModel.findOneAndDelete({ _id: reviewId, ownerId: userId }),
 
         userModel.findOneAndUpdate(
             { _id: userId },

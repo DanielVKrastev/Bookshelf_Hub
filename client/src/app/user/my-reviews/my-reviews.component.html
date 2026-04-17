@@ -13,6 +13,7 @@
                                     <th>Username</th>
                                     <th>All Reviews</th>
                                     <th>My Review</th>
+                                    <th>My Rating</th>
                                     <th>Date</th>
                                     <th>Action</th>
                                 </tr>
@@ -24,9 +25,39 @@
                             } @else {
                             <tbody>
                                 @for (review of reviews; track $index) {
+                                @if (editingReviewId === review._id) {
+                                    <!-- EDIT MODE -->
+                                <tr>
+                                    <td colspan="6">
+                                        <div class="edit-form">
+                                            <div class="form-grid">
+
+                                                <div class="form-group">
+                                                    <label>Review Text</label>
+                                                    <input [(ngModel)]="editForm.text" />
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Rating</label>
+                                                    <input type="number" [(ngModel)]="editForm.rating" />
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="btn-edit" (click)="saveEdit(review)">Save</button>
+                                            <button class="btn-delete" (click)="cancelEdit()">Cancel</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                }
+                                @else {
+                                <!-- VIEW MODE -->
                                 <tr>
                                     <td>
-                                        <a routerLink="/books-catalog">
+                                        <a [routerLink]="`/books-catalog/${review.bookId._id}`">
                                             <span class="d-flex gap-5 align-items-center">
                                                 {{$index}}
                                                 <span class="cart">
@@ -51,19 +82,22 @@
                                     </td>
                                     <td>
                                         <span>
+                                            {{review.rating}}
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span>
                                             <span>{{review.created_at | date: 'dd MMM yyyy, HH:mm' }}</span>
                                         </span>
                                     </td>
                                     <td>
-                                        <a routerLink="/books-catalog">
-                                            <div class="action-buttons">
-                                                <button class="btn-edit">
-                                                    Edit
-                                                </button>
-                                            </div>
-                                        </a>
+                                        <div class="action-buttons">
+                                            <button class="btn-edit" (click)="startEdit(review)">Edit</button>
+                                            <button class="btn-delete" (click)="deleteReview(review.bookId._id, review._id)">Delete</button>
+                                        </div>
                                     </td>
                                 </tr>
+                                }
                                 }
                             </tbody>
                             }

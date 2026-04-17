@@ -5,10 +5,12 @@ import { UserForAuth } from '../../types/user';
 import { Review } from '../../types/review';
 import { UserService } from '../user.service';
 import { DatePipe } from '@angular/common';
+import { ApiService } from '../../apiService';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-my-reviews',
-  imports: [BreadcrumbComponent, RouterLink, DatePipe],
+  imports: [BreadcrumbComponent, RouterLink, FormsModule, DatePipe],
   templateUrl: './my-reviews.component.html',
   styleUrl: './my-reviews.component.css',
 })
@@ -17,8 +19,72 @@ export class MyReviewsComponent implements OnInit {
   reviews: Review[] = [];
   isLoading: boolean = true;
 
-  constructor(private userService: UserService, private cd: ChangeDetectorRef) {
+  editingReviewId: string | null = null;
+  editForm: any = {};
+
+  constructor(private userService: UserService, private apiService: ApiService, private cd: ChangeDetectorRef) {
     this.user = this.userService.user as UserForAuth;
+  }
+
+  startEdit(review: Review) {
+    this.editingReviewId = review._id;
+
+    this.editForm = {
+      text: review.text,
+      rating: review.rating,
+    };
+  }
+
+  saveEdit(review: Review) {
+    const {
+      text,
+      rating,
+    } = this.editForm;
+
+    this.apiService.updateReview(
+      review.bookId._id,
+      review._id,
+      text,
+      rating,
+    ).subscribe({
+      // update UI without reload
+      next: (updated) => {
+
+        this.reviews = this.reviews.map(r =>
+          r._id === review._id
+            ? {
+              ...r,
+              text: updated.text,
+              rating: updated.rating
+            }
+            : r
+        );
+        this.cancelEdit();
+        this.cd.detectChanges();
+      },
+      error: (err) => {
+        console.error(err);
+      }
+    });
+  }
+
+  deleteReview(bookId: string, reviewId: string) {
+    if (!confirm('Are you sure you want to delete this review?')) return;
+
+    this.apiService.deleteReview(bookId, reviewId).subscribe({
+      next: () => {
+        this.reviews = this.reviews.filter(r => r._id !== reviewId); //delete book form table
+        this.cd.detectChanges();
+      },
+      error: (err) => {
+        console.error(err);
+      }
+    });
+  }
+
+  cancelEdit() {
+    this.editingReviewId = null;
+    this.editForm = {};
   }
 
   ngOnInit(): void {

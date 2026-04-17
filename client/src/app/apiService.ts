@@ -81,13 +81,13 @@ export class ApiService {
   }
 
   //Update Review book
-  updateReview(bookId: string, reviewId: string,) {
-    const payload = {}
-    return this.http.put<Book>(`/api/books/${bookId}/reviews/${reviewId}`, payload);
+  updateReview(bookId: string, reviewId: string, text: string, rating: number) {
+    const payload = { text, rating }
+    return this.http.put<Review>(`/api/books/${bookId}/reviews/${reviewId}`, payload);
   }
 
   //Delete review from book - http.delete book ID review ID
   deleteReview(bookId: string, reviewId: string,) {
-    return this.http.delete<Book>(`/api/books/${bookId}/reviews/${reviewId}`);
+    return this.http.delete<Review>(`/api/books/${bookId}/reviews/${reviewId}`);
   }
 }
