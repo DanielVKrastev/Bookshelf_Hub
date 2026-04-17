@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { BreadcrumbComponent } from "../../core/breadcrumb/breadcrumb.component";
 import { RouterLink } from "@angular/router";
 import { UserService } from '../user.service';
@@ -14,17 +14,27 @@ import { ApiService } from '../../apiService';
   styleUrl: './my-books.component.css',
 })
 export class MyBooksComponent implements OnInit {
-  user: UserForAuth;
+user: UserForAuth;
   books: Book[] = [];
   isLoading: boolean = true;
 
-  constructor(private userService: UserService, private apiService: ApiService) {
+  constructor(private userService: UserService, private cd: ChangeDetectorRef) {
     this.user = this.userService.user as UserForAuth;
   }
 
   ngOnInit(): void {
-    this.books = this.userService.user?.books || [];
-    this.isLoading = false;
+    this.userService.initUser().subscribe({
+      next: (user) => {
+        //this.user = user as UserForAuth;
+        this.books = user?.books || [];
+        this.isLoading = false;
+        this.cd.detectChanges();
+      },
+      error: () => {
+        this.isLoading = false;
+      }
+    });
   }
 
 }
+

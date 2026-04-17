@@ -1,4 +1,4 @@
-<app-breadcrumb pageName="Profile" pageNameUrl="/profile" pageName2="My Reviews"/>
+<app-breadcrumb pageName="Profile" pageNameUrl="/profile" pageName2="My Reviews" />
 <!--My Books Section Start -->
 <div class="cart-section section-padding pb-0">
     <div class="container">
@@ -17,30 +17,32 @@
                                     <th>Action</th>
                                 </tr>
                             </thead>
-                             @if (isLoading) {
-                                    <div>Loading...</div>
+                            @if (isLoading) {
+                            <tr>
+                                <td colspan="6">Loading...</td>
+                            </tr>
                             } @else {
                             <tbody>
-                                @for (review of user.reviews; track $index) {
+                                @for (review of reviews; track $index) {
                                 <tr>
                                     <td>
                                         <a routerLink="/books-catalog">
                                             <span class="d-flex gap-5 align-items-center">
                                                 {{$index}}
                                                 <span class="cart">
-                                                    <img [src]="review.bookId.imageUrl" alt="img">
+                                                    <img [src]="review.bookId?.imageUrl" alt="img">
                                                 </span>
                                                 <span class="cart-title">
-                                                    {{review.bookId.title}}
+                                                    {{review.bookId?.title}}
                                                 </span>
                                             </span>
                                         </a>
                                     </td>
                                     <td>
-                                        {{review.bookId.ownerId.username}}
+                                        {{review.bookId?.ownerId?.username}}
                                     </td>
                                     <td>
-                                        <span>{{review.bookId.reviews.length}}</span>
+                                        <span>{{review.bookId?.reviews?.length}}</span>
                                     </td>
                                     <td>
                                         <span>
@@ -49,7 +51,7 @@
                                     </td>
                                     <td>
                                         <span>
-                                             <span>{{review.created_at | date: 'dd MMM yyyy, HH:mm' }}</span>
+                                            <span>{{review.created_at | date: 'dd MMM yyyy, HH:mm' }}</span>
                                         </span>
                                     </td>
                                     <td>
@@ -62,9 +64,9 @@
                                         </a>
                                     </td>
                                 </tr>
-                            }
+                                }
                             </tbody>
-                        }
+                            }
                         </table>
                     </div>
                 </div>

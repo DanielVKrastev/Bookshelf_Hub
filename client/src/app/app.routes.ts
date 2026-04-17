@@ -29,7 +29,10 @@ export const routes: Routes = [
          },
         { path: 'my-books',  component: MyBooksComponent },
         { path: 'my-favourite', component: MyFavouriteComponent },
-        { path: 'my-reviews', component: MyReviewsComponent },
+        { path: 'my-reviews', 
+            loadComponent: () => import('./user/my-reviews/my-reviews.component').then((c) => c.MyReviewsComponent),
+            //component: MyReviewsComponent
+        },
     ] },
     { path: 'add-book', 
         //component: AddBookComponent,

@@ -16,10 +16,12 @@
                                 </tr>
                             </thead>
                             @if (isLoading) {
-                                    <div>Loading...</div>
+                            <tr>
+                                <td colspan="6">Loading...</td>
+                            </tr>
                             } @else {
                             <tbody>
-                                @for (book of user.books; track $index) {
+                                @for (book of books; track $index) {
                                 <tr>
                                     <td>
                                         <a [routerLink]="`/books-catalog/${book._id}`">
@@ -39,7 +41,7 @@
                                     </td>
                                     <td>
                                         <span>
-                                            {{book.reviews.length}}
+                                            {{book.reviews?.length}}
                                         </span>
                                     </td>
                                     <td>
