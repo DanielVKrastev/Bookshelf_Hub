@@ -55,9 +55,9 @@
                         <br>
                         <div>
                             <span class="thumb">
-                                <img src="assets/img/testimonial/client-2.png" alt="img">
+                                <img class="profile-img" [src]="book.owner.imageUrl || 'assets/img/testimonial/client-2.png'" alt="img">
                             </span>
-                            <span class="content"> {{book.owner?.username}}</span>
+                            <span class="profile-username content">{{book.owner?.username}}</span>
                         </div>
                         <div class="category-box">
                             <div class="category-list">
@@ -115,7 +115,7 @@
                             @for (review of book.reviews; track $index) {
                             <div class="review-wrap-area d-flex gap-4">
                                 <div class="review-thumb">
-                                    <img src="assets/img/shop-details/review.png" alt="img">
+                                    <img class="profile-img-review" [src]="review.owner.imageUrl || 'assets/img/shop-details/review.png'" alt="img">
                                 </div>
                                 <div class="review-content">
                                     <div
