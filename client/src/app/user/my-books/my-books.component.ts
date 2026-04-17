@@ -5,21 +5,91 @@ import { UserService } from '../user.service';
 import { UserForAuth } from '../../types/user';
 import { Book } from '../../types/book';
 import { ApiService } from '../../apiService';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-my-books',
   standalone: true,
-  imports: [BreadcrumbComponent, RouterLink],
+  imports: [BreadcrumbComponent, RouterLink, FormsModule],
   templateUrl: './my-books.component.html',
   styleUrl: './my-books.component.css',
 })
 export class MyBooksComponent implements OnInit {
-user: UserForAuth;
+  user: UserForAuth;
   books: Book[] = [];
   isLoading: boolean = true;
 
-  constructor(private userService: UserService, private cd: ChangeDetectorRef) {
+  editingBookId: string | null = null;
+  editForm: any = {};
+
+  constructor(private userService: UserService, private apiService: ApiService, private cd: ChangeDetectorRef) {
     this.user = this.userService.user as UserForAuth;
+  }
+
+  startEdit(book: Book) {
+    this.editingBookId = book._id;
+
+    this.editForm = {
+      title: book.title,
+      author: book.author,
+      publisher: book.publisher,
+      publishYear: book.publishYear,
+      language: book.language,
+      totalPage: book.totalPage,
+      country: book.country,
+      imageUrl: book.imageUrl,
+      description: book.description,
+      category: book.category
+    };
+  }
+
+  saveEdit(bookId: string) {
+    const {
+      author,
+      category,
+      country,
+      description,
+      imageUrl,
+      language,
+      publishYear,
+      publisher,
+      title,
+      totalPage,
+    } = this.editForm;
+
+    this.apiService.editBook(
+      bookId,
+      author,
+      category,
+      country,
+      description,
+      imageUrl,
+      language,
+      publishYear,
+      publisher,
+      title,
+      totalPage
+    ).subscribe({
+      // update UI without reload
+      next: (updated) => {
+
+        const index = this.books.findIndex(b => b._id === bookId);
+        if (index !== -1) {
+          this.books[index] = { ...this.books[index], ...updated };
+        }
+
+        this.cancelEdit();
+        this.cd.detectChanges();
+      },
+      error: (err) => {
+        console.error(err);
+      }
+    });
+  }
+
+  cancelEdit() {
+    this.editingBookId = null;
+    this.editForm = {};
   }
 
   ngOnInit(): void {
@@ -27,6 +97,8 @@ user: UserForAuth;
       next: (user) => {
         //this.user = user as UserForAuth;
         this.books = user?.books || [];
+        console.log(this.books);
+
         this.isLoading = false;
         this.cd.detectChanges();
       },
@@ -35,6 +107,6 @@ user: UserForAuth;
       }
     });
   }
-
+  
 }
 

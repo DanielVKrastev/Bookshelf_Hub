@@ -187,6 +187,7 @@ function createBook(req, res, next) {
         language,
         country,
         reviewText,
+        description,
         imageUrl
     } = req.body;
 
@@ -200,6 +201,7 @@ function createBook(req, res, next) {
         publishYear,
         category,
         language,
+        description,
         country,
         ownerId: userId,
         favourites: [],
@@ -256,6 +258,49 @@ function deleteBook(req, res, next) {
         .catch(next);
 }
 
+function editBook(req, res, next) {
+    const { bookId } = req.params;
+    const { _id: userId } = req.user;
+
+    const {
+        title,
+        author,
+        totalPage,
+        publisher,
+        publishYear,
+        category,
+        language,
+        country,
+        description,
+        imageUrl
+    } = req.body;
+
+    bookModel.findOneAndUpdate(
+        { _id: bookId, ownerId: userId },
+        {
+            title,
+            author,
+            totalPage,
+            publisher,
+            publishYear,
+            category,
+            language,
+            country,
+            description,
+            imageUrl
+        },
+        { new: true, runValidators: true }
+    )
+        .then(updatedBook => {
+            if (updatedBook) {
+                res.status(200).json(updatedBook);
+            } else {
+                res.status(403).json({ message: 'Not allowed!' });
+            }
+        })
+        .catch(next);
+}
+
 //likes
 function favourite(req, res, next) {
     const { bookId } = req.params;
@@ -275,5 +320,6 @@ module.exports = {
     getBook,
     createBook,
     deleteBook,
+    editBook,
     favourite,
 };

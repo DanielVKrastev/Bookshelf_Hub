@@ -1,4 +1,4 @@
-<app-breadcrumb pageName="Profile" pageNameUrl="/profile" pageName2="My Books"/>
+<app-breadcrumb pageName="Profile" pageNameUrl="/profile" pageName2="My Books" />
 <!--My Books Section Start -->
 <div class="cart-section section-padding pb-0">
     <div class="container">
@@ -9,7 +9,9 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>Product</th>
+                                    <th>Book</th>
+                                    <th>Author</th>
+                                    <th>Total Page</th>
                                     <th>Rating</th>
                                     <th>Reviews</th>
                                     <th>Action</th>
@@ -22,8 +24,73 @@
                             } @else {
                             <tbody>
                                 @for (book of books; track $index) {
+                                @if (editingBookId === book._id) {
+                                <tr>
+                                    <td colspan="5">
+                                        <!-- EDIT MODE -->
+                                        <div class="edit-form">
+                                            <div class="form-grid">
+
+                                                <div class="form-group">
+                                                    <label>Title</label>
+                                                    <input [(ngModel)]="editForm.title" />
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Author</label>
+                                                    <input [(ngModel)]="editForm.author" />
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Publisher</label>
+                                                    <input [(ngModel)]="editForm.publisher" />
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Publish Year</label>
+                                                    <input [(ngModel)]="editForm.publishYear" />
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Language</label>
+                                                    <input [(ngModel)]="editForm.language" />
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Total Pages</label>
+                                                    <input [(ngModel)]="editForm.totalPage" />
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Country</label>
+                                                    <input [(ngModel)]="editForm.country" />
+                                                </div>
+
+                                                <div class="form-group full-width">
+                                                    <label>Image URL</label>
+                                                    <input [(ngModel)]="editForm.imageUrl" />
+                                                </div>
+
+                                                <div class="form-group full-width">
+                                                    <label>Description</label>
+                                                    <textarea [(ngModel)]="editForm.description"></textarea>
+                                                </div>
+                                                <input [(ngModel)]="editForm.category" hidden />
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="action-buttons">
+                                            <button class="btn-edit" (click)="saveEdit(book._id)">Save</button>
+                                            <button class="btn-delete" (click)="cancelEdit()">Cancel</button>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                } @else {
                                 <tr>
                                     <td>
+                                        <!-- VIEW MODE -->
                                         <a [routerLink]="`/books-catalog/${book._id}`">
                                             <span class="d-flex gap-5 align-items-center">
                                                 {{$index}}
@@ -35,31 +102,38 @@
                                                 </span>
                                             </span>
                                         </a>
+
+
                                     </td>
+
+                                    <td>
+                                        <span>{{book.author}}</span>
+                                    </td>
+
+                                    <td>
+                                        <span>{{book.totalPage}}</span>
+                                    </td>
+
                                     <td>
                                         <span>{{book.averageRating}}</span>
                                     </td>
+
                                     <td>
-                                        <span>
-                                            {{book.reviews?.length}}
-                                        </span>
+                                        <span>{{book.reviews?.length}}</span>
                                     </td>
+
                                     <td>
                                         <div class="action-buttons">
-                                            <button class="btn-delete">
-                                                Delete
-                                            </button>
-
-                                            <button class="btn-edit">
-                                                Edit
-                                            </button>
+                                            <button class="btn-edit" (click)="startEdit(book)">Edit</button>
+                                            <button class="btn-delete">Delete</button>
                                         </div>
                                     </td>
                                 </tr>
                                 }
+                                }
 
                             </tbody>
-                        }
+                            }
                         </table>
                     </div>
                 </div>

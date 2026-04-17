@@ -2,6 +2,62 @@ img {
     width: 80px;
 }
 
+td input {
+    color: black;
+}
+
+
+.edit-form {
+  background: #fff;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  margin-top: 10px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group.full-width {
+  grid-column: span 2;
+}
+
+label {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+input,
+textarea {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+input:focus,
+textarea:focus {
+  border-color: #ff6b6b;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(255, 107, 107, 0.2);
+}
+
+textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
 .action-buttons{
     display:flex;
     gap:10px;
