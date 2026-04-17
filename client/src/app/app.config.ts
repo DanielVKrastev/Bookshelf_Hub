@@ -5,7 +5,7 @@ import { routes } from './app.routes';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { appInterceptor } from './app-interceptor';
 import { UserService } from './user/user.service';
-import { firstValueFrom } from 'rxjs';
+import { catchError, firstValueFrom, of } from 'rxjs';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -17,9 +17,14 @@ export const appConfig: ApplicationConfig = {
       anchorScrolling: 'enabled'
     })),
     provideAppInitializer(() => {
-  const userService = inject(UserService);
-  return firstValueFrom(userService.initUser());
-})
+      const userService = inject(UserService);
+
+      return firstValueFrom(
+        userService.initUser().pipe(
+          catchError(() => of(null))
+        )
+      );
+    })
 
   ]
 };

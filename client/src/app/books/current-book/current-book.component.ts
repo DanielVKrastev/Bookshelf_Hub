@@ -23,18 +23,25 @@ export class CurrentBookComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private apiService: ApiService, private userService: UserService, private router: Router, private cd: ChangeDetectorRef) {}
 
-  ngOnInit(): void {
-    const { _id } = this.userService?.user!;
-    this.userId = _id;
+ngOnInit(): void {
+  const user = this.userService.user;
 
-    this.loadBook();
+  if (!user) {
+    this.userId = '';
+  }else {
+    this.userId = user._id;
   }
+
+  this.loadBook();
+  
+}
 
   loadBook() {
     const bookId = this.route.snapshot.params['bookId'];
 
     this.apiService.getSingleBook(bookId).subscribe(book => {
       this.book = book;
+        console.log(this.book);
       this.isLoading = false;
       this.cd.detectChanges();
     });
