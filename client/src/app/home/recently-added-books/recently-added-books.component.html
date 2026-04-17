@@ -12,7 +12,7 @@
             @for (book of books; track $index) {
             <div class="shop-box-items style-2">
                 <div class="book-thumb center">
-                    <a [routerLink]="'/books-catalog/'+book._id"><img src="assets/img/book/05.png"
+                    <a [routerLink]="'/books-catalog/'+book._id"><img [src]="book.imageUrl || 'assets/img/book/02.png'"
                             alt="img"></a>
                     <ul class="post-box">
                         <li>
@@ -32,13 +32,13 @@
                     <h5> {{book.author}} </h5>
                     <h3><a routerLink="/books-catalog/1">{{book.title}}</a></h3>
                     <ul class="">
-                        <li>{{book.created_at}}</li>
+                        <li>{{book.created_at | elapsedTime}}</li>
                         <li>Publisher: {{book.publisher}}</li>
                     </ul>
                     <ul class="author-post">
                         <li class="authot-list">
                             <span class="thumb">
-                                <img src="assets/img/testimonial/client-2.png" alt="img">
+                                <img class="profile-img" [src]="book.owner.imageUrl || `assets/img/testimonial/client-2.png`" alt="img">
                             </span>
                             <span class="content">{{book.owner.username}}</span>
                         </li>

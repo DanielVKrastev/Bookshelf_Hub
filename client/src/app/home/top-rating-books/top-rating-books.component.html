@@ -41,13 +41,13 @@
                                     </li>
                                 </ul>
                             </div>
-                            <span class="mt-10">{{book.created_at}} 5 hours ago</span>
+                            <span class="mt-10">{{book.created_at | elapsedTime}}</span>
                             <ul class="author-post">
                                 <li class="authot-list">
                                     <span class="thumb">
-                                        <img src="assets/img/testimonial/client-2.png" alt="img">
+                                        <img class="profile-img" [src]="book.owner.imageUrl || `assets/img/testimonial/client-2.png`" alt="img">
                                     </span>
-                                    <span class="content mt-10">Wilson</span>
+                                    <span class="profile-username content mt-10">{{book.owner.username}}</span>
                                 </li>
                             </ul>
                             <div class="shop-btn">

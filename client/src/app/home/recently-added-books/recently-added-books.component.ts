@@ -2,10 +2,11 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { RouterLink } from "@angular/router";
 import { Book } from '../../types/book';
 import { ApiService } from '../../apiService';
+import { ElapsedTimePipe } from '../../pipes/elapsed-time-pipe';
 
 @Component({
   selector: 'app-recently-added-books',
-  imports: [RouterLink],
+  imports: [RouterLink, ElapsedTimePipe],
   templateUrl: './recently-added-books.component.html',
   styleUrl: './recently-added-books.component.css',
 })

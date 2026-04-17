@@ -7140,6 +7140,7 @@ span {
   margin: 0 auto;
 }
 .team-box-items .team-image .thumb img {
+  border-radius: 50%;
   max-width: 100%;
 }
 .team-box-items .team-image .shape-img {

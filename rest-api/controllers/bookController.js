@@ -51,8 +51,11 @@ function getBooks(req, res, next) {
                 preserveNullAndEmptyArrays: true
             }
         },
+        {
+            $sort: { created_at: -1 }
+        },
 
-        // 📏 limit (IMPORTANT: after calculations is fine for small apps)
+        //limit (IMPORTANT: after calculations is fine for small apps)
         ...(limit ? [{ $limit: limit }] : [])
     ])
         .then(books => res.json(books))
