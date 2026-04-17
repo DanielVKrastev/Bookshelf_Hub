@@ -87,6 +87,20 @@ export class MyBooksComponent implements OnInit {
     });
   }
 
+  deleteBook(bookId: string) {
+    if (!confirm('Are you sure you want to delete this book?')) return;
+
+    this.apiService.deleteBook(bookId).subscribe({
+      next: () => {
+        this.books = this.books.filter(b => b._id !== bookId); //delete book form table
+        this.cd.detectChanges();
+      },
+      error: (err) => {
+        console.error(err);
+      }
+    });
+  }
+
   cancelEdit() {
     this.editingBookId = null;
     this.editForm = {};
@@ -97,8 +111,6 @@ export class MyBooksComponent implements OnInit {
       next: (user) => {
         //this.user = user as UserForAuth;
         this.books = user?.books || [];
-        console.log(this.books);
-
         this.isLoading = false;
         this.cd.detectChanges();
       },
@@ -107,6 +119,6 @@ export class MyBooksComponent implements OnInit {
       }
     });
   }
-  
+
 }
 

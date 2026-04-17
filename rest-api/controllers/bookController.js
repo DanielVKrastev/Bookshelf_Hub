@@ -1,4 +1,4 @@
-const { bookModel, userModel } = require('../models');
+const { bookModel, userModel, reviewModel } = require('../models');
 const { newReview } = require('./reviewController');
 const mongoose = require('mongoose');
 

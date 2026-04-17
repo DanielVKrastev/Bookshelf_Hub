@@ -63,6 +63,11 @@ export class ApiService {
     return this.http.put<Book>(`/api/books/${bookId}`, payload);
   }
 
+    //Delete book - http.delete book ID
+  deleteBook(bookId: string) {
+    return this.http.delete<Book>(`/api/books/${bookId}`);
+  }
+
   //CRUD operations
   //Update book
   createReviewForBook(bookId: string, rating: number, text: string, ownerId: string) {
@@ -73,11 +78,6 @@ export class ApiService {
   favouriteForBook(bookId: string, ownerId: string) {
     const payload = { ownerId }
     return this.http.put<Book>(`/api/books/${bookId}/favourite`, payload);
-  }
-
-  //Delete book - http.delete book ID
-  deleteBook(bookId: string) {
-    return this.http.delete<Book>(`/api/books/${bookId}`);
   }
 
   //Update Review book
