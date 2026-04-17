@@ -7,6 +7,7 @@ import { Book } from '../../types/book';
 import { DatePipe } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { UserService } from '../../user/user.service';
+import { ProfileDetails } from '../../types/user';
 
 @Component({
   selector: 'app-current-book',
@@ -18,13 +19,14 @@ import { UserService } from '../../user/user.service';
 export class CurrentBookComponent implements OnInit {
   book: Book = <Book>{};
   isLoading: boolean = true;
-  userId: string | undefined = undefined;
+  userId: string = '';
 
-  constructor(private route: ActivatedRoute, private apiService: ApiService, private userService: UserService, private router: Router, private cd: ChangeDetectorRef) {
-    this.userId = userService.user?.id;
-  }
+  constructor(private route: ActivatedRoute, private apiService: ApiService, private userService: UserService, private router: Router, private cd: ChangeDetectorRef) {}
 
   ngOnInit(): void {
+    const { _id } = this.userService?.user!;
+    this.userId = _id;
+
     this.loadBook();
   }
 
@@ -33,7 +35,6 @@ export class CurrentBookComponent implements OnInit {
 
     this.apiService.getSingleBook(bookId).subscribe(book => {
       this.book = book;
-      console.log(this.book);
       this.isLoading = false;
       this.cd.detectChanges();
     });
@@ -68,19 +69,21 @@ export class CurrentBookComponent implements OnInit {
       text = '(This user hasn’t written any reviews yet.)';
     }
 
-    this.apiService.createReviewForBook(this.book._id, this.rating, text, this.userId as string).subscribe(data => {
+    this.apiService.createReviewForBook(this.book._id, this.rating, text).subscribe(data => {
+      form.reset();
+      this.resetHover();
       this.loadBook();
     });
   }
 
   addFavourite() {
-    this.apiService.favouriteForBook(this.book._id, this.userId as string).subscribe(data => {
+    this.apiService.favouriteForBook(this.book._id, this.userId).subscribe(data => {
       this.loadBook();
     });
   }
 
   checkFavourite(): boolean {
-    return this.book?.favourites?.includes(this.userId as string);
+      return this.book?.favourites?.includes(this.userId);
   }
 
 }

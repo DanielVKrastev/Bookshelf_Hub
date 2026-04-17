@@ -7,8 +7,7 @@ import moment from 'moment';
 })
 export class ElapsedTimePipe implements PipeTransform {
   transform(date: string, ...args: unknown[]): unknown {
-    console.log({date});
-    
+
     return moment(date).fromNow();
   }
 }

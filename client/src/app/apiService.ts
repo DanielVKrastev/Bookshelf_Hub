@@ -70,8 +70,8 @@ export class ApiService {
 
   //CRUD operations
   //Update book
-  createReviewForBook(bookId: string, rating: number, text: string, ownerId: string) {
-    const payload = { rating, text, ownerId }
+  createReviewForBook(bookId: string, rating: number, text: string) {
+    const payload = { rating, text }
     return this.http.post<Book>(`/api/books/${bookId}`, payload);
   }
 

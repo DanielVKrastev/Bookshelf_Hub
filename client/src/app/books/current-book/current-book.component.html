@@ -45,9 +45,9 @@
                             <button type="button" class="theme-btn style-2" (click)="addFavourite()">
                                 <i class="far fa-heart"></i>
                                 @if(checkFavourite()) {
-                                    Add to Favourites
-                                } @else {
                                     Already in favorites
+                                } @else {
+                                    Add to Favourites
                                 }
                             </button>
                             <a [routerLink]="[]" fragment="post-review" class="theme-btn">Add Review</a>
@@ -55,7 +55,7 @@
                         <br>
                         <div>
                             <span class="thumb">
-                                <img class="profile-img" [src]="book.owner.imageUrl || 'assets/img/testimonial/client-2.png'" alt="img">
+                                <img class="profile-img" [src]="book.owner?.imageUrl || 'assets/img/testimonial/client-2.png'" alt="img">
                             </span>
                             <span class="profile-username content">{{book.owner?.username}}</span>
                         </div>
