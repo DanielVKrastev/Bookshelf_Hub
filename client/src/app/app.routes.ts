@@ -11,6 +11,7 @@ import { MyReviewsComponent } from './user/my-reviews/my-reviews.component';
 import { CurrentBookComponent } from './books/current-book/current-book.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AuthGuard } from './guards/auth.guard';
+import { AuthIsLoggedGuard } from './guards/authIsLogged.guard';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -21,26 +22,25 @@ export const routes: Routes = [
         { path: ':bookId', component: CurrentBookComponent },
     ] },
      // User routing
-    { path: 'login', component: LoginComponent },
-    { path: 'register', component: RegisterComponent },
+    { path: 'login', canActivate: [AuthIsLoggedGuard], component: LoginComponent },
+    { path: 'register', canActivate: [AuthIsLoggedGuard], component: RegisterComponent },
     { path: 'profile', canActivate: [AuthGuard], children: [
         { path: '', 
-            loadComponent: () => import('./user/profile/profile.component').then((c) => c.ProfileComponent),
+            loadComponent: () => import('./user/profile/profile.component').then((c) => c.ProfileComponent), //lazy loading
          },
-        { path: 'my-books',  component: MyBooksComponent },
+        { path: 'my-books',  
+            loadComponent: () => import('./user/my-books/my-books.component').then((c) => c.MyBooksComponent)
+        },
         { path: 'my-favourite', component: MyFavouriteComponent },
         { path: 'my-reviews', 
             loadComponent: () => import('./user/my-reviews/my-reviews.component').then((c) => c.MyReviewsComponent),
-            //component: MyReviewsComponent
         },
     ] },
     { path: 'add-book', 
-        //component: AddBookComponent,
-        loadComponent: () => import('./books/add-book/add-book.component').then((c) => c.AddBookComponent), //lazy loading
+        loadComponent: () => import('./books/add-book/add-book.component').then((c) => c.AddBookComponent),
         canActivate: [AuthGuard],
      },
     { path: '404', 
-        //component: PageNotFoundComponent,
         loadComponent: () => import('./page-not-found/page-not-found.component').then((c) => c.PageNotFoundComponent),
     },
     { path: '**', redirectTo: '/404' },
