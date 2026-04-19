@@ -27,64 +27,185 @@
                                 @if (editingBookId === book._id) {
                                 <tr>
                                     <td colspan="5">
-                                        <!-- EDIT MODE -->
-                                        <div class="edit-form">
-                                            <div class="form-grid">
+                                            <form #form="ngForm" (ngSubmit)="saveEdit(editForm)">
+                                            <!-- EDIT MODE -->
+                                            <div class="edit-form">
+                                                <div class="form-grid">
+                                                    <div class="form-group">
+                                                        <label>Title</label>
+                                                        <input [(ngModel)]="editForm.title" ngModel #inputTitle="ngModel" name="title" required
+                                                        [class]="
+                                                                ((inputTitle?.touched && inputTitle?.errors?.['required'])) 
+                                                                ? 'input-error' : ''
+                                                                "
+                                                        />
+                                                        
+                                                        @if(inputTitle?.touched){
+                                                            <span>
+                                                                @if(inputTitle?.errors?.['required']){
+                                                                    <p class="error">
+                                                                        Username is required!
+                                                                    </p>
+                                                                }
+                                                            </span>
+                                                            }
+                                                    </div>
 
-                                                <div class="form-group">
-                                                    <label>Title</label>
-                                                    <input [(ngModel)]="editForm.title" />
-                                                </div>
+                                                    <div class="form-group">
+                                                        <label>Author</label>
+                                                        <input [(ngModel)]="editForm.author" ngModel #inputAuthor="ngModel" name="author" required
+                                                        [class]="
+                                                                ((inputAuthor?.touched && inputAuthor?.errors?.['required'])) 
+                                                                ? 'input-error' : ''
+                                                                "
+                                                        />
 
-                                                <div class="form-group">
-                                                    <label>Author</label>
-                                                    <input [(ngModel)]="editForm.author" />
-                                                </div>
+                                                        @if(inputAuthor?.touched){
+                                                            <span>
+                                                                @if(inputAuthor?.errors?.['required']){
+                                                                    <p class="error">
+                                                                        Author is required!
+                                                                    </p>
+                                                                }
+                                                            </span>
+                                                        }
+                                                    </div>
 
-                                                <div class="form-group">
-                                                    <label>Publisher</label>
-                                                    <input [(ngModel)]="editForm.publisher" />
-                                                </div>
+                                                    <div class="form-group">
+                                                        <label>Publisher</label>
+                                                        <input [(ngModel)]="editForm.publisher" ngModel #inputPublisher="ngModel" name="publisher" required
+                                                        [class]="
+                                                                ((inputPublisher?.touched && inputPublisher?.errors?.['required'])) 
+                                                                ? 'input-error' : ''
+                                                                "
+                                                        />
+                                                        @if(inputPublisher?.touched){
+                                                            <span>
+                                                                @if(inputPublisher?.errors?.['required']){
+                                                                    <p class="error">
+                                                                        Publisher is required!
+                                                                    </p>
+                                                                }
+                                                            </span>
+                                                        }
+                                                    </div>
 
-                                                <div class="form-group">
-                                                    <label>Publish Year</label>
-                                                    <input [(ngModel)]="editForm.publishYear" />
-                                                </div>
+                                                    <div class="form-group">
+                                                        <label>Publish Year</label>
+                                                        <input [(ngModel)]="editForm.publishYear" 
+                                                        ngModel 
+                                                        #inputPublisherYear="ngModel" 
+                                                        name="publishYear" 
+                                                        required
+                                                        type="number"
+                                                        min="0"
+                                                        max="2100"
+                                                        [class]="
+                                                                ((inputPublisherYear?.touched && inputPublisherYear?.errors?.['required']) ||
+                                                                    (inputPublisherYear?.touched && inputPublisherYear?.errors?.['min']) ||
+                                                                (inputPublisherYear?.touched && inputPublisherYear?.errors?.['max'])) 
+                                                                ? 'input-error' : ''
+                                                                "
+                                                        />
+                                                        @if(inputPublisherYear?.touched){
+                                                            <span>
+                                                                @if(inputPublisherYear?.errors?.['required']){
+                                                                    <p class="error">
+                                                                        Publish year is required!
+                                                                    </p>
+                                                                }
+                                                                 @if(inputPublisherYear?.errors?.['min']){
+                                                                    <p class="error">
+                                                                        Publish year is minimum 0!
+                                                                    </p>
+                                                                }
+                                                                 @if(inputPublisherYear?.errors?.['max']){
+                                                                    <p class="error">
+                                                                        Publish year is maximum 2100!
+                                                                    </p>
+                                                                }
+                                                            </span>
+                                                            }
+                                                    </div>
 
-                                                <div class="form-group">
-                                                    <label>Language</label>
-                                                    <input [(ngModel)]="editForm.language" />
-                                                </div>
+                                                    <div class="form-group">
+                                                        <label>Language</label>
+                                                        <input [(ngModel)]="editForm.language" ngModel #inputLanguage="ngModel" name="language" required
+                                                         [class]="
+                                                                ((inputLanguage?.touched && inputLanguage?.errors?.['required'])) 
+                                                                ? 'input-error' : ''
+                                                                "
+                                                        />
+                                                        @if(inputLanguage?.touched){
+                                                            <span>
+                                                                @if(inputLanguage?.errors?.['required']){
+                                                                    <p class="error">
+                                                                        Language is required!
+                                                                    </p>
+                                                                }
+                                                            </span>
+                                                            }
+                                                    </div>
 
-                                                <div class="form-group">
-                                                    <label>Total Pages</label>
-                                                    <input [(ngModel)]="editForm.totalPage" />
-                                                </div>
+                                                    <div class="form-group">
+                                                        <label>Total Pages</label>
+                                                        <input [(ngModel)]="editForm.totalPage" ngModel #inputTotalPage="ngModel" type="number" name="totalPage" required
+                                                        [class]="
+                                                                ((inputTotalPage?.touched && inputTotalPage?.errors?.['required'])) 
+                                                                ? 'input-error' : ''
+                                                                "
+                                                        />
+                                                        @if(inputTotalPage?.touched){
+                                                            <span>
+                                                                @if(inputTotalPage?.errors?.['required']){
+                                                                    <p class="error">
+                                                                        Total Pages is required!
+                                                                    </p>
+                                                                }
+                                                            </span>
+                                                            }
+                                                    </div>
 
-                                                <div class="form-group">
-                                                    <label>Country</label>
-                                                    <input [(ngModel)]="editForm.country" />
-                                                </div>
+                                                    <div class="form-group">
+                                                        <label>Country</label>
+                                                        <input [(ngModel)]="editForm.country" ngModel #inputCountry="ngModel" name="country" required
+                                                        [class]="
+                                                                ((inputCountry?.touched && inputCountry?.errors?.['required'])) 
+                                                                ? 'input-error' : ''
+                                                                "
+                                                        />
+                                                        @if(inputCountry?.touched){
+                                                            <span>
+                                                                @if(inputCountry?.errors?.['required']){
+                                                                    <p class="error">
+                                                                        Country is required!
+                                                                    </p>
+                                                                }
+                                                            </span>
+                                                            }
+                                                    </div>
 
-                                                <div class="form-group full-width">
-                                                    <label>Image URL</label>
-                                                    <input [(ngModel)]="editForm.imageUrl" />
-                                                </div>
+                                                    <div class="form-group full-width">
+                                                        <label>Image URL</label>
+                                                        <input [(ngModel)]="editForm.imageUrl" ngModel name="imageUrl" />
+                                                    </div>
 
-                                                <div class="form-group full-width">
-                                                    <label>Description</label>
-                                                    <textarea [(ngModel)]="editForm.description"></textarea>
+                                                    <div class="form-group full-width">
+                                                        <label>Description</label>
+                                                        <textarea [(ngModel)]="editForm.description" ngModel name="description"></textarea>
+                                                    </div>
+                                                    <input [(ngModel)]="editForm.category" name="category" hidden />
+                                                    <input [(ngModel)]="book._id" name="bookId" hidden />
                                                 </div>
-                                                <input [(ngModel)]="editForm.category" hidden />
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="action-buttons">
-                                            <button class="btn-edit" (click)="saveEdit(book._id)">Save</button>
-                                            <button class="btn-delete" (click)="cancelEdit()">Cancel</button>
-                                        </div>
-                                    </td>
+                                        </form>
+                                        </td>
+                                        <td>
+                                            <div class="action-buttons">
+                                                <button class="btn-edit" form="editForm">Save</button>
+                                                <button class="btn-delete" (click)="cancelEdit()">Cancel</button>
+                                            </div>
+                                        </td>
                                 </tr>
 
                                 } @else {

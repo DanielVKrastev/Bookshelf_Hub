@@ -48,7 +48,7 @@ textarea {
 
 input:focus,
 textarea:focus {
-  border-color: #ff6b6b;
+  border-color: #fdb3b3;
   outline: none;
   box-shadow: 0 0 0 2px rgba(255, 107, 107, 0.2);
 }
@@ -98,4 +98,13 @@ textarea {
 .btn-edit:hover{
     background:#d6e4ff;
     transform:translateY(-2px);
+}
+
+.error{
+  color: red;
+}
+
+.input-error {
+    border-left-color: red!important;
+    border-color: red!important;
 }

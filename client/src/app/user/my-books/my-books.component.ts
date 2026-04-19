@@ -5,7 +5,7 @@ import { UserService } from '../user.service';
 import { UserForAuth } from '../../types/user';
 import { Book } from '../../types/book';
 import { ApiService } from '../../apiService';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-my-books',
@@ -30,6 +30,7 @@ export class MyBooksComponent implements OnInit {
     this.editingBookId = book._id;
 
     this.editForm = {
+      bookId: book._id,
       title: book.title,
       author: book.author,
       publisher: book.publisher,
@@ -43,8 +44,14 @@ export class MyBooksComponent implements OnInit {
     };
   }
 
-  saveEdit(bookId: string) {
+  saveEdit(form:NgModel) {
+    if (form.invalid) {
+      console.error('Invalid Login Form!');
+      return;
+    }
+
     const {
+      bookId,
       author,
       category,
       country,
