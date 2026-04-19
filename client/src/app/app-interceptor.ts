@@ -8,7 +8,7 @@ const { apiUrl } = environment;
 const API = '/api';
 
 export const appInterceptor: HttpInterceptorFn = (req, next) => {
-  if(req.url.startsWith(API)){
+  if (req.url.startsWith(API)) {
     req = req.clone({
       url: req.url.replace(API, apiUrl),
       withCredentials: true, //add JWT in cookies
@@ -16,12 +16,22 @@ export const appInterceptor: HttpInterceptorFn = (req, next) => {
   }
 
   const router = inject(Router);
-  
+
   return next(req).pipe(
     catchError((err) => {
-      if(err.status === 401) {
-        // navigate to home
-        router.navigate(['/home']);
+      if (err.status === 401) {
+        const url = router.url;
+
+        const isPublic =
+          url === '/' ||
+          url === '/home' ||
+          url === '/books-catalog' ||
+          url.startsWith('/books-catalog/');
+
+        if (!isPublic) {
+          router.navigate(['/login']);
+        }
+
       } else {
         console.log('ERROR', err);
         router.navigate(['/404']);
