@@ -4,6 +4,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { UserService } from '../user.service';
 import { FormControl, FormGroup, FormsModule, NgForm, Validators } from '@angular/forms';
 import { ProfileDetails } from '../../types/user';
+import { emailValidator } from '../../utils/email.validator';
+import { EMAIL_DOMAINS } from '../../../constants';
 
 @Component({
   selector: 'app-profile',
@@ -26,7 +28,7 @@ export class ProfileComponent implements OnInit{
 
     form = new FormGroup({
       username: new FormControl(this.profileDetails.username, [Validators.required, Validators.minLength(5)]),
-      email: new FormControl(this.profileDetails.email, [Validators.required]),
+      email: new FormControl(this.profileDetails.email, [Validators.required, emailValidator(EMAIL_DOMAINS)]),
       description: new FormControl(this.profileDetails.description),
       imageUrl: new FormControl(this.profileDetails.imageUrl),
       books: new FormControl(this.profileDetails.books),

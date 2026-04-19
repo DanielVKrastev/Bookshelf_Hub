@@ -56,3 +56,12 @@
     border-radius:6px;
     cursor:pointer;
 }
+
+.error{
+    color: red;
+}
+
+.input-error {
+    border-left-color: red!important;
+    border-color: red!important;
+}

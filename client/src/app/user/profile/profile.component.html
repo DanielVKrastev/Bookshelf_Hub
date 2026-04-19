@@ -74,9 +74,30 @@
                         id="username"
                         formControlName="username"
                         placeholder="Username"
+                        minlength="3"
                         required
+                        [class]="
+                            ((form.get('username')?.touched && form.get('username')?.errors?.['required']) 
+                            || (form.get('username')?.touched && form.get('username')?.errors?.['minlength'])) 
+                            ? 'input-error' : ''
+                            "
                     >
                     </div>
+                    @if(form.get('username')?.touched){
+                        <div>
+                            @if(form.get('username')?.errors?.['required']){
+                            <p class="error">
+                                Username is required!
+                            </p>
+                            }
+
+                            @if(form.get('username')?.errors?.['minlength']){
+                            <p class="error">
+                                Username must be at least 3 characters!
+                            </p>
+                            }
+                        </div>
+                    }
 
                     <div class="edit-field">
                         <label>Email</label>
@@ -88,8 +109,29 @@
                             placeholder="danielk@gmail.com"
                             formControlName="email"
                             required
+                            [class]="
+                            ((form.get('email')?.touched && form.get('email')?.errors?.['emailValidator']) 
+                            || (form.get('email')?.touched && form.get('email')?.errors?.['required'])) 
+                            ? 'input-error' : ''
+                            "
                         >
                     </div>
+
+                    @if(form.get('email')?.touched){
+                        <div>
+                            @if(form.get('email')?.errors?.['required']){
+                            <p class="error">
+                                Email is required!
+                            </p>
+                            }
+
+                            @if(form.get('email')?.errors?.['emailValidator']){
+                            <p class="error">
+                                Email is not valid!
+                            </p>
+                            }
+                        </div>
+                    }
 
                     <div class="edit-field">
                         <label>Image Url Avatar</label>
@@ -100,7 +142,6 @@
                             name="imageUrl"
                             placeholder="https://..."
                             formControlName="imageUrl"
-                            required
                         >
                     </div>
 
