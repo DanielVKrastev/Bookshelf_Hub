@@ -34,7 +34,9 @@ ngOnInit(): void {
     this.userId = user._id;
   }
 
-  this.loadBook();
+  this.route.params.subscribe(params => { //listen
+    this.loadBook();
+  });
   
 }
 

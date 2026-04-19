@@ -14,7 +14,8 @@ export const appConfig: ApplicationConfig = {
     ),
     provideBrowserGlobalErrorListeners(),
     provideRouter(routes, withInMemoryScrolling({
-      anchorScrolling: 'enabled'
+      anchorScrolling: 'enabled',
+      scrollPositionRestoration: 'enabled'
     })),
     provideAppInitializer(() => {
       const userService = inject(UserService);
