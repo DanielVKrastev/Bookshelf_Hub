@@ -3,7 +3,7 @@ import { Router, RouterLink } from "@angular/router";
 import { EMAIL_DOMAINS } from '../../../constants';
 import { UserService } from '../user.service';
 import { FormsModule, NgForm } from '@angular/forms';
-import { EmailDirective } from '../../directives/email.directive';
+import { EmailDirective } from '../../../directives/email.directive';
 
 @Component({
   selector: 'app-login',

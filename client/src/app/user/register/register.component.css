@@ -87,3 +87,12 @@
 .register-footer a:hover{
     text-decoration:underline;
 }
+
+.error{
+    color: red;
+}
+
+.input-error {
+    border-left-color: red!important;
+    border-color: red!important;
+}

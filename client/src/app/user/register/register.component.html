@@ -7,7 +7,11 @@
             <p>Register to access your account</p>
         </div>
 
-        <form class="register-form" #form="ngForm" (ngSubmit)="register(form)">
+        <form class="register-form" #form="ngForm" (ngSubmit)="register(form)"
+        appMatchPassword 
+        [passwordControlName]="'password'" 
+        [rePasswordControlName]="'rePassword'"
+      >
 
             <div class="register-field">
                 <label>Username *</label>
@@ -18,9 +22,31 @@
                     placeholder="User"
                     ngModel
                     #inputUsername="ngModel"
+                    minlength="3"
                     required
+                    [class]="
+                            ((inputUsername?.touched && inputUsername?.errors?.['required']) 
+                            || (inputUsername?.touched && inputUsername?.errors?.['minlength'])) 
+                            ? 'input-error' : ''
+                            "
                 >
             </div>
+
+            @if(inputUsername?.touched){
+                <div>
+                @if(inputUsername?.errors?.['required']){
+                    <p class="error">
+                        Username is required!
+                    </p>
+                }
+
+                 @if(inputUsername?.errors?.['minlength']){
+                    <p class="error">
+                        Username must be at least 3 characters!
+                    </p>
+                }
+                </div>
+            }
 
             <div class="register-field">
                 <label>Email Address *</label>
@@ -31,9 +57,30 @@
                     placeholder="danielk@gmail.com"
                     ngModel
                     #inputEmail="ngModel"
-                    required
+                    required [appEmail]="domains"
+                    [class]="
+                            ((inputEmail?.touched && inputEmail?.errors?.['emailValidator']) 
+                            || (inputEmail?.touched && inputEmail?.errors?.['required'])) 
+                            ? 'input-error' : ''
+                            "
                 >
             </div>
+
+            @if(inputEmail?.touched){
+                <div>
+                @if(inputEmail?.errors?.['required']){
+                    <p class="error">
+                        Email is required!
+                    </p>
+                }
+
+                 @if(inputEmail?.errors?.['emailValidator']){
+                    <p class="error">
+                        Email is not valid!
+                    </p>
+                }
+                </div>
+            }
 
             <div class="register-field">
                 <label>Password *</label>
@@ -46,8 +93,29 @@
                     ngModel 
                     minlength="5"
                     required
+                    [class]="
+                            ((inputPassword?.touched && inputPassword?.errors?.['required']) 
+                            || (inputPassword?.touched && inputPassword?.errors?.['minlength'])) 
+                            ? 'input-error' : '' 
+                            " 
                 >
             </div>
+
+            @if(inputPassword?.touched){
+                <div>
+                    @if(inputPassword?.errors?.['required']){
+                        <p class="error">
+                            Password is required!
+                        </p>
+                    }
+                    @if(inputPassword?.errors?.['minlength']){
+                        <p class="error">
+                             Password must be at least 5 characters!
+                        </p>
+                }
+                </div>
+            }
+
 
             <div class="register-field">
                 <label>Confirm Password *</label>
@@ -60,8 +128,23 @@
                     ngModel 
                     minlength="5"
                     required
+                    [class]="
+                            ((inputrePassword?.touched && inputrePassword?.errors?.['required']) 
+                            || (inputrePassword?.touched && form?.errors?.['matchPasswordsValidator'])) 
+                            ? 'input-error' : '' 
+                            " 
                 >
             </div>
+
+            @if(inputrePassword?.touched){
+                <div>
+                @if (form?.errors?.['matchPasswordsValidator']) {
+                    <p class="error">
+                        Passwords do not match!
+                    </p>
+                }
+            </div>
+            }
 
             <button class="register-btn" type="submit">
                 Create Account
