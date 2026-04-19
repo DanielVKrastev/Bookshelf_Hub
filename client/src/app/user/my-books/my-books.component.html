@@ -27,7 +27,7 @@
                                 @if (editingBookId === book._id) {
                                 <tr>
                                     <td colspan="5">
-                                            <form #form="ngForm" (ngSubmit)="saveEdit(editForm)">
+                                            <form id="editForm" #form="ngForm" (ngSubmit)="saveEdit(form)">
                                             <!-- EDIT MODE -->
                                             <div class="edit-form">
                                                 <div class="form-grid">

@@ -109,3 +109,12 @@ textarea {
     background:#d6e4ff;
     transform:translateY(-2px);
 }
+
+.error{
+  color: red;
+}
+
+.input-error {
+    border-left-color: red!important;
+    border-color: red!important;
+}

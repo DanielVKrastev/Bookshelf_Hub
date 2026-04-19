@@ -6,7 +6,7 @@ import { Review } from '../../types/review';
 import { UserService } from '../user.service';
 import { DatePipe } from '@angular/common';
 import { ApiService } from '../../apiService';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm, NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-my-reviews',
@@ -30,20 +30,29 @@ export class MyReviewsComponent implements OnInit {
     this.editingReviewId = review._id;
 
     this.editForm = {
+      bookId: review.bookId._id,
+      reviewId: review._id,
       text: review.text,
       rating: review.rating,
     };
   }
 
-  saveEdit(review: Review) {
+  saveEdit(form: NgForm) {        
+    if (form.invalid) {
+      console.error('Invalid Login Form!');
+      return;
+    }
+
     const {
+      bookId,
+      reviewId,
       text,
       rating,
     } = this.editForm;
 
     this.apiService.updateReview(
-      review.bookId._id,
-      review._id,
+      bookId,
+      reviewId,
       text,
       rating,
     ).subscribe({
@@ -51,7 +60,7 @@ export class MyReviewsComponent implements OnInit {
       next: (updated) => {
 
         this.reviews = this.reviews.map(r =>
-          r._id === review._id
+          r._id === reviewId
             ? {
               ...r,
               text: updated.text,

@@ -29,25 +29,63 @@
                                     <!-- EDIT MODE -->
                                 <tr>
                                     <td colspan="6">
-                                        <div class="edit-form">
-                                            <div class="form-grid">
+                                        <form id="editForm" #form="ngForm" (ngSubmit)="saveEdit(form)">
+                                            <div class="edit-form">
+                                                <div class="form-grid">
 
-                                                <div class="form-group">
-                                                    <label>Review Text</label>
-                                                    <input [(ngModel)]="editForm.text" />
+                                                    <div class="form-group">
+                                                        <label>Review Text</label>
+                                                        <input [(ngModel)]="editForm.text" ngModel #inputText="ngModel" name="text"/>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label>Rating</label>
+                                                        <input type="number" 
+                                                            [(ngModel)]="editForm.rating" 
+                                                            ngModel #inputRating="ngModel" 
+                                                            name="rating" 
+                                                            min="1"
+                                                            max="5"
+                                                            required
+                                                            [class]="
+                                                                ((inputRating?.touched && inputRating?.errors?.['required']) ||
+                                                                    (inputRating?.touched && inputRating?.errors?.['min']) ||
+                                                                (inputRating?.touched && inputRating?.errors?.['max'])) 
+                                                                ? 'input-error' : ''
+                                                                "
+                                                        />
+
+                                                         @if(inputRating?.touched){
+                                                            <span>
+                                                                @if(inputRating?.errors?.['required']){
+                                                                    <p class="error">
+                                                                        Rating is required!
+                                                                    </p>
+                                                                }
+                                                                 @if(inputRating?.errors?.['min']){
+                                                                    <p class="error">
+                                                                        Rating is minimum 1!
+                                                                    </p>
+                                                                }
+                                                                 @if(inputRating?.errors?.['max']){
+                                                                    <p class="error">
+                                                                        Rating is maximum 5!
+                                                                    </p>
+                                                                }
+                                                            </span>
+                                                            }
+                                                    </div>
+
+                                                    <input [(ngModel)]="review.bookId._id" name="bookId" hidden />
+                                                    <input [(ngModel)]="review._id" name="reviewId" hidden />
+
                                                 </div>
-
-                                                <div class="form-group">
-                                                    <label>Rating</label>
-                                                    <input type="number" [(ngModel)]="editForm.rating" />
-                                                </div>
-
                                             </div>
-                                        </div>
+                                        </form>
                                     </td>
                                     <td>
                                         <div class="action-buttons">
-                                            <button class="btn-edit" (click)="saveEdit(review)">Save</button>
+                                            <button class="btn-edit" form="editForm">Save</button>
                                             <button class="btn-delete" (click)="cancelEdit()">Cancel</button>
                                         </div>
                                     </td>

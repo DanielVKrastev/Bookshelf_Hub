@@ -5,7 +5,7 @@ import { UserService } from '../user.service';
 import { UserForAuth } from '../../types/user';
 import { Book } from '../../types/book';
 import { ApiService } from '../../apiService';
-import { FormsModule, NgModel } from '@angular/forms';
+import { FormsModule, NgForm, NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-my-books',
@@ -44,7 +44,7 @@ export class MyBooksComponent implements OnInit {
     };
   }
 
-  saveEdit(form:NgModel) {
+  saveEdit(form: NgForm) {
     if (form.invalid) {
       console.error('Invalid Login Form!');
       return;
