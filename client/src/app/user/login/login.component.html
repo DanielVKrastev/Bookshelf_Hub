@@ -19,13 +19,13 @@
                     required [appEmail]="domains"
                     [class]="
                             ((inputEmail?.touched && inputEmail?.errors?.['emailValidator']) 
-                            || (inputEmail?.touched && inputEmail?.errors?.['required'])) 
+                            || (inputEmail?.touched && inputEmail?.errors?.['required']) || isSubmitClick) 
                             ? 'input-error' : ''
                             "
                 >
             </div>
 
-            @if(inputEmail?.touched){
+            @if(inputEmail?.touched || isSubmitClick){
                 <div>
                 @if(inputEmail?.errors?.['required']){
                     <p class="error">
@@ -54,13 +54,13 @@
                     required
                     [class]="
                             ((inputPassword?.touched && inputPassword?.errors?.['required']) 
-                            || (inputPassword?.touched && inputPassword?.errors?.['minlength'])) 
+                            || (inputPassword?.touched && inputPassword?.errors?.['minlength']) || isSubmitClick) 
                             ? 'input-error' : '' 
                             " 
                 >
             </div>
 
-             @if(inputEmail?.touched){
+             @if(inputEmail?.touched || isSubmitClick){
                 <div>
                     @if(inputPassword?.errors?.['required']){
                         <p class="error">

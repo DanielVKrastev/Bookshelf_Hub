@@ -16,11 +16,14 @@ export class LoginComponent {
   domains = EMAIL_DOMAINS;
 
   errorMessage: string = '';
+  isSubmitClick: boolean = false;
 
   constructor(private userService: UserService, private router: Router, private cd: ChangeDetectorRef) { }
 
   login(form: NgForm) {
     if (form.invalid) {
+      this.isSubmitClick = true;
+      this.cd.detectChanges();
       console.error('Invalid Login Form!');
       return;
     }

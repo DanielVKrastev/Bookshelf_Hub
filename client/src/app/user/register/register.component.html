@@ -26,13 +26,13 @@
                     required
                     [class]="
                             ((inputUsername?.touched && inputUsername?.errors?.['required']) 
-                            || (inputUsername?.touched && inputUsername?.errors?.['minlength'])) 
+                            || (inputUsername?.touched && inputUsername?.errors?.['minlength']) || isSubmitClick) 
                             ? 'input-error' : ''
                             "
                 >
             </div>
 
-            @if(inputUsername?.touched){
+            @if(inputUsername?.touched || isSubmitClick){
                 <div>
                 @if(inputUsername?.errors?.['required']){
                     <p class="error">
@@ -60,13 +60,13 @@
                     required [appEmail]="domains"
                     [class]="
                             ((inputEmail?.touched && inputEmail?.errors?.['emailValidator']) 
-                            || (inputEmail?.touched && inputEmail?.errors?.['required'])) 
+                            || (inputEmail?.touched && inputEmail?.errors?.['required']) || isSubmitClick) 
                             ? 'input-error' : ''
                             "
                 >
             </div>
 
-            @if(inputEmail?.touched){
+            @if(inputEmail?.touched || isSubmitClick){
                 <div>
                 @if(inputEmail?.errors?.['required']){
                     <p class="error">
@@ -95,13 +95,13 @@
                     required
                     [class]="
                             ((inputPassword?.touched && inputPassword?.errors?.['required']) 
-                            || (inputPassword?.touched && inputPassword?.errors?.['minlength'])) 
+                            || (inputPassword?.touched && inputPassword?.errors?.['minlength']) || isSubmitClick) 
                             ? 'input-error' : '' 
                             " 
                 >
             </div>
 
-            @if(inputPassword?.touched){
+            @if(inputPassword?.touched || isSubmitClick){
                 <div>
                     @if(inputPassword?.errors?.['required']){
                         <p class="error">
@@ -130,13 +130,13 @@
                     required
                     [class]="
                             ((inputrePassword?.touched && inputrePassword?.errors?.['required']) 
-                            || (inputrePassword?.touched && form?.errors?.['matchPasswordsValidator'])) 
+                            || (inputrePassword?.touched && form?.errors?.['matchPasswordsValidator']) || isSubmitClick) 
                             ? 'input-error' : '' 
                             " 
                 >
             </div>
 
-            @if(inputrePassword?.touched){
+            @if(inputrePassword?.touched || isSubmitClick){
                 <div>
                 @if (form?.errors?.['matchPasswordsValidator']) {
                     <p class="error">

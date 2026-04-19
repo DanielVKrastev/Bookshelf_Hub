@@ -17,11 +17,14 @@ export class RegisterComponent {
   domains = EMAIL_DOMAINS;
 
   errorMessage: string = '';
+  isSubmitClick: boolean = false;
 
   constructor(private userService: UserService, private router: Router, private cd: ChangeDetectorRef) { }
 
   register(form: NgForm) {
     if (form.invalid) {
+      this.isSubmitClick = true;
+      this.cd.detectChanges();
       console.error('Invalid Register Form!');
       return;
     }

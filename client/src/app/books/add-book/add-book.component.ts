@@ -18,10 +18,8 @@ export class AddBookComponent {
 
   addBook(form: NgForm) {
     if(form.invalid){
-      console.log(form.value);
       this.isSubmitClick = true;
-      console.log(this.isSubmitClick);
-      
+
       this.cd.detectChanges();
       //console.error('Invalid Login Form!');
       return;
