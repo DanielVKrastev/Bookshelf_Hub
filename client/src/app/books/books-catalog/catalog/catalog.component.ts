@@ -28,9 +28,14 @@ export class CatalogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.apiService.getBooks().subscribe(books => {
+    this.apiService.getBooks().subscribe({
+      next: (books) => {
       this.books = books;
       this.cd.detectChanges();
+      },
+      error: () => {
+        this.books = [];
+      }
     })
   }
 }
