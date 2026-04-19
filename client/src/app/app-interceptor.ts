@@ -26,6 +26,7 @@ export const appInterceptor: HttpInterceptorFn = (req, next) => {
           url === '/' ||
           url === '/home' ||
           url === '/books-catalog' ||
+          url === '/register' ||
           url.startsWith('/books-catalog/');
 
         if (!isPublic) {

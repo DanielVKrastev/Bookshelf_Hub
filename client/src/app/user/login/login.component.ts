@@ -3,11 +3,12 @@ import { Router, RouterLink } from "@angular/router";
 import { EMAIL_DOMAINS } from '../../../constants';
 import { UserService } from '../user.service';
 import { FormsModule, NgForm } from '@angular/forms';
+import { EmailDirective } from '../../directives/email.directive';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [RouterLink, FormsModule],
+  imports: [RouterLink, FormsModule, EmailDirective],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })

@@ -63,3 +63,12 @@
     text-align: center;
     margin-top: 20px;
 }
+
+.error{
+    color: red;
+}
+
+.input-error {
+    border-left-color: red!important;
+    border-color: red!important;
+}

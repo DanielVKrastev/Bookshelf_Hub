@@ -16,7 +16,12 @@
                     placeholder="danielk@gmail.com"
                     ngModel
                     #inputEmail="ngModel"
-                    required
+                    required [appEmail]="domains"
+                    [class]="
+                            ((inputEmail?.touched && inputEmail?.errors?.['emailValidator']) 
+                            || (inputEmail?.touched && inputEmail?.errors?.['required'])) 
+                            ? 'input-error' : ''
+                            "
                 >
             </div>
 
@@ -47,13 +52,34 @@
                     ngModel 
                     minlength="5"
                     required
+                    [class]="
+                            ((inputPassword?.touched && inputPassword?.errors?.['required']) 
+                            || (inputPassword?.touched && inputPassword?.errors?.['minlength'])) 
+                            ? 'input-error' : '' 
+                            " 
                 >
             </div>
+
+             @if(inputEmail?.touched){
+                <div>
+                    @if(inputPassword?.errors?.['required']){
+                        <p class="error">
+                            Password is required!
+                        </p>
+                    }
+                    @if(inputPassword?.errors?.['minlength']){
+                        <p class="error">
+                             Password must be at least 5 characters!
+                        </p>
+                }
+                </div>
+            }
 
             <button class="theme-btn" type="submit">
                 <span>Log In</span>
             </button>
 
+            <!-- TODO: Remember me -->
             <div class="remember-me">
                 <label>
                     <input type="checkbox"> Remember Me
