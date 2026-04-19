@@ -20,6 +20,22 @@
                 >
             </div>
 
+            @if(inputEmail?.touched){
+                <div>
+                @if(inputEmail?.errors?.['required']){
+                    <p class="error">
+                        Email is required!
+                    </p>
+                }
+
+                 @if(inputEmail?.errors?.['emailValidator']){
+                    <p class="error">
+                        Email is not valid!
+                    </p>
+                }
+                </div>
+            }
+
             <div class="form-clt">
                 <span>Password *</span>
                 <input 

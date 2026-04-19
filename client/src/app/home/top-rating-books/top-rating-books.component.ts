@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { RouterLink } from "@angular/router";
 import { Book } from '../../types/book';
 import { ApiService } from '../../apiService';
-import { ElapsedTimePipe } from '../../pipes/elapsed-time-pipe';
+import { ElapsedTimePipe } from '../../shared/pipes/elapsed-time-pipe';
 
 @Component({
   selector: 'app-top-rating-books',
