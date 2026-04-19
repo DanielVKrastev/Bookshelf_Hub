@@ -150,6 +150,12 @@
                 Create Account
             </button>
 
+            @if(errorMessage !== '') {
+                <p class="error">
+                    {{errorMessage}}
+                </p>
+            }
+
         </form>
 
         <div class="register-footer">

@@ -32,7 +32,6 @@ export class LoginComponent {
         this.router.navigate(['/home']);
       },
       error: (err) => {
-        console.log(err);
         if (err.status === 401) {
           this.errorMessage = 'Invalid email or password';
         } else {

@@ -16,21 +16,27 @@ export const appInterceptor: HttpInterceptorFn = (req, next) => {
   }
 
   const router = inject(Router);
+  const url = router.url;
+
+  const isPublic =
+    url === '/' ||
+    url === '/home' ||
+    url === '/books-catalog' ||
+    url === '/register' ||
+    url.startsWith('/books-catalog/');
 
   return next(req).pipe(
     catchError((err) => {
       if (err.status === 401) {
-        const url = router.url;
-
-        const isPublic =
-          url === '/' ||
-          url === '/home' ||
-          url === '/books-catalog' ||
-          url === '/register' ||
-          url.startsWith('/books-catalog/');
 
         if (!isPublic && !req.url.includes('/login')) {
           router.navigate(['/login']);
+        }
+
+      } else if(err.status === 409) {
+        
+         if (!isPublic && !req.url.includes('/register')) {
+          router.navigate(['/register']);
         }
 
       } else {

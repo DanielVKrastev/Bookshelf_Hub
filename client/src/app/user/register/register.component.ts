@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { Router, RouterLink } from "@angular/router";
 import { UserService } from '../user.service';
 import { EMAIL_DOMAINS } from '../../../constants';
@@ -16,18 +16,30 @@ import { MatchPasswordDirective } from '../../../directives/matchPassword.direct
 export class RegisterComponent {
   domains = EMAIL_DOMAINS;
 
-  constructor(private userService: UserService, private router: Router){}
+  errorMessage: string = '';
 
-  register(form: NgForm){
-    if(form.invalid){
+  constructor(private userService: UserService, private router: Router, private cd: ChangeDetectorRef) { }
+
+  register(form: NgForm) {
+    if (form.invalid) {
       console.error('Invalid Register Form!');
       return;
     }
 
     const { username, email, tel, password, rePassword } = form.value;
-    
-    this.userService.register(username, email, tel, password, rePassword).subscribe(() => {
-      this.router.navigate(['/home']);
+
+    this.userService.register(username, email, tel, password, rePassword).subscribe({
+      next: () => {
+        this.router.navigate(['/home']);
+      },
+      error: (err) => {
+        if (err.status === 409) {
+          this.errorMessage = 'Email or username already exists';
+        } else {
+          this.errorMessage = 'Something went wrong';
+        }
+        this.cd.detectChanges();
+      }
     });
   }
 }
