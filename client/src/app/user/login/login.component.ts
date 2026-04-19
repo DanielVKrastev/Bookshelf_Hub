@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { Router, RouterLink } from "@angular/router";
 import { EMAIL_DOMAINS } from '../../../constants';
 import { UserService } from '../user.service';
@@ -15,18 +15,31 @@ import { EmailDirective } from '../../directives/email.directive';
 export class LoginComponent {
   domains = EMAIL_DOMAINS;
 
-  constructor(private userService: UserService, private router: Router){}
+  errorMessage: string = '';
 
-  login(form: NgForm){
-    if(form.invalid){
+  constructor(private userService: UserService, private router: Router, private cd: ChangeDetectorRef) { }
+
+  login(form: NgForm) {
+    if (form.invalid) {
       console.error('Invalid Login Form!');
       return;
     }
 
     const { email, password } = form.value;
-    
-    this.userService.login(email, password).subscribe(() => {
-      this.router.navigate(['/home']);
+
+    this.userService.login(email, password).subscribe({
+      next: () => {
+        this.router.navigate(['/home']);
+      },
+      error: (err) => {
+        console.log(err);
+        if (err.status === 401) {
+          this.errorMessage = 'Invalid email or password';
+        } else {
+          this.errorMessage = 'Something went wrong';
+        }
+        this.cd.detectChanges();
+      }
     });
   }
 }

@@ -29,7 +29,9 @@ export const appInterceptor: HttpInterceptorFn = (req, next) => {
           url === '/register' ||
           url.startsWith('/books-catalog/');
 
-        if (!isPublic) {
+        if (!isPublic && !req.url.includes('/login')) {
+          console.log('routers logn');
+          
           router.navigate(['/login']);
         }
 
