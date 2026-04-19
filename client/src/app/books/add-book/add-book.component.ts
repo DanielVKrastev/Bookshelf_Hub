@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { BreadcrumbComponent } from "../../core/breadcrumb/breadcrumb.component";
 import { FormsModule, NgForm } from '@angular/forms';
 import { ApiService } from '../../apiService';
@@ -12,10 +12,18 @@ import { Router } from '@angular/router';
   styleUrl: './add-book.component.css',
 })
 export class AddBookComponent {
-  constructor(private apiService: ApiService, private router: Router){}
+  isSubmitClick: boolean = false;
+
+  constructor(private apiService: ApiService, private router: Router, private cd: ChangeDetectorRef){}
 
   addBook(form: NgForm) {
     if(form.invalid){
+      console.log(form.value);
+      this.isSubmitClick = true;
+      console.log(this.isSubmitClick);
+      
+      this.cd.detectChanges();
+      //console.error('Invalid Login Form!');
       return;
     }
     

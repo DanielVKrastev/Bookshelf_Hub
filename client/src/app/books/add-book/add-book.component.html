@@ -1,4 +1,4 @@
-<app-breadcrumb pageName="Add Book"/>
+<app-breadcrumb pageName="Add Book" />
 <!-- Add book-->
 <form class="book-add-form two-columns" #form="ngForm" (ngSubmit)="addBook(form)">
 
@@ -10,18 +10,46 @@
 
             <div class="book-field">
                 <label>Title *</label>
-                <input type="text" name="title" id="title" #inputTitle="ngModel" ngModel required>
+                <input type="text" name="title" id="title" #inputTitle="ngModel" ngModel required [class]="
+                        ((inputTitle?.touched && inputTitle?.errors?.['required']) || isSubmitClick) 
+                        ? 'input-error' : ''
+                        ">
+                @if(inputTitle?.touched || isSubmitClick){
+                <span>
+                    @if(inputTitle?.errors?.['required']){
+                    <p class="error">
+                        Title is required!
+                    </p>
+                    }
+                </span>
+                }
             </div>
 
             <div class="book-field">
                 <label>Author *</label>
-                <input type="text" name="author" id="author" #inputAuthor="ngModel" ngModel required>
+                <input type="text" name="author" id="author" #inputAuthor="ngModel" ngModel required [class]="
+                        ((inputAuthor?.touched && inputAuthor?.errors?.['required']) || isSubmitClick) 
+                        ? 'input-error' : ''
+                        ">
+                @if(inputAuthor?.touched || isSubmitClick){
+                <span>
+                    @if(inputAuthor?.errors?.['required']){
+                    <p class="error">
+                        Author is required!
+                    </p>
+                    }
+                </span>
+                }
             </div>
 
             <div class="book-field">
                 <label>Category *</label>
 
-                <select name="category" id="category" #inputCategory="ngModel" ngModel required>
+                <select name="category" id="category" #inputCategory="ngModel" ngModel required
+                [class]="
+                        ((inputCategory?.touched && inputCategory?.errors?.['required']) || isSubmitClick) 
+                        ? 'input-error' : ''
+                        ">
                     <option value="">Select category</option>
                     <option value="fiction">Fiction</option>
                     <option value="non-fiction">Non-Fiction</option>
@@ -41,16 +69,61 @@
                     <option value="comics">Comics / Graphic Novels</option>
                     <option value="poetry">Poetry</option>
                 </select>
+                 @if(inputCategory?.touched || isSubmitClick){
+                <span>
+                    @if(inputCategory?.errors?.['required']){
+                    <p class="error">
+                        Category is required!
+                    </p>
+                    }
+                </span>
+                }
+
             </div>
+            
 
             <div class="book-field">
                 <label>Language *</label>
-                <input type="text" name="language" name="language" id="language" #inputLanguage="ngModel" ngModel required>
+                <input type="text" name="language" name="language" id="language" #inputLanguage="ngModel" ngModel
+                    required [class]="
+                                ((inputLanguage?.touched && inputLanguage?.errors?.['required']) || isSubmitClick) 
+                                ? 'input-error' : ''
+                                ">
+                @if(inputLanguage?.touched || isSubmitClick){
+                <span>
+                    @if(inputLanguage?.errors?.['required']){
+                    <p class="error">
+                        Language is required!
+                    </p>
+                    }
+                </span>
+                }
             </div>
 
             <div class="book-field full">
                 <label>Description</label>
-                <textarea name="description" name="description" id="description" rows="8" #inputDescription="ngModel" ngModel required minlength="10"></textarea>
+                <textarea name="description" name="description" id="description" rows="8" #inputDescription="ngModel"
+                    ngModel required minlength="10" [class]="
+                        ((inputDescription?.touched && inputDescription?.errors?.['required'])
+                        || (inputDescription?.touched && inputDescription?.errors?.['minlength']) || isSubmitClick) 
+                        ? 'input-error' : ''
+                        ">
+                                </textarea>
+
+                @if(inputDescription?.touched || isSubmitClick){
+                <span>
+                    @if(inputDescription?.errors?.['required']){
+                    <p class="error">
+                        Description is required!
+                    </p>
+                    }
+                    @if(inputDescription?.errors?.['minlength']){
+                    <p class="error">
+                        Description is min 10 characters!
+                    </p>
+                    }
+                </span>
+                }
             </div>
 
         </div>
@@ -64,22 +137,84 @@
 
             <div class="book-field">
                 <label>Publisher *</label>
-                <input type="text" name="publisher" id="publisher" #inputPublisher="ngModel" ngModel required>
+                <input type="text" name="publisher" id="publisher" #inputPublisher="ngModel" ngModel required [class]="
+                        ((inputPublisher?.touched && inputPublisher?.errors?.['required']) || isSubmitClick) 
+                        ? 'input-error' : ''
+                        ">
+                @if(inputPublisher?.touched || isSubmitClick){
+                <span>
+                    @if(inputPublisher?.errors?.['required']){
+                    <p class="error">
+                        Publisher is required!
+                    </p>
+                    }
+                </span>
+                }
             </div>
 
             <div class="book-field">
                 <label>Publication Year *</label>
-                <input type="number" name="publishYear" id="publishYear" #inputPublishYear="ngModel" ngModel required>
+                <input type="number" name="publishYear" id="publishYear" #inputPublishYear="ngModel" ngModel required
+                    min="0" max="2100" [class]="
+                        ((inputPublishYear?.touched && inputPublishYear?.errors?.['required']) ||
+                            (inputPublishYear?.touched && inputPublishYear?.errors?.['min']) ||
+                        (inputPublishYear?.touched && inputPublishYear?.errors?.['max']) || isSubmitClick) 
+                        ? 'input-error' : ''
+                        ">
+                @if(inputPublishYear?.touched || isSubmitClick){
+                <span>
+                    @if(inputPublishYear?.errors?.['required']){
+                    <p class="error">
+                        Publish year is required!
+                    </p>
+                    }
+                    @if(inputPublishYear?.errors?.['min']){
+                    <p class="error">
+                        Publish year is minimum 0!
+                    </p>
+                    }
+                    @if(inputPublishYear?.errors?.['max']){
+                    <p class="error">
+                        Publish year is maximum 2100!
+                    </p>
+                    }
+                </span>
+                }
             </div>
 
             <div class="book-field">
                 <label>Pages *</label>
-                <input type="number" name="totalPage" id="totalPage" #inputTotalPage="ngModel" ngModel required>
+                <input type="number" name="totalPage" id="totalPage" #inputTotalPage="ngModel" ngModel required [class]="
+                        ((inputTotalPage?.touched && inputTotalPage?.errors?.['required']) || isSubmitClick) 
+                        ? 'input-error' : ''
+                        ">
+                @if(inputTotalPage?.touched || isSubmitClick){
+                <span>
+                    @if(inputTotalPage?.errors?.['required']){
+                    <p class="error">
+                        Total Pages is required!
+                    </p>
+                    }
+                </span>
+                }
             </div>
 
             <div class="book-field">
                 <label>Country *</label>
-                <input type="text" name="country" id="country" #inputCountry="ngModel" ngModel required >
+                <input type="text" name="country" id="country" #inputCountry="ngModel" ngModel required
+                [class]="
+                        ((inputCountry?.touched && inputCountry?.errors?.['required']) || isSubmitClick) 
+                        ? 'input-error' : ''
+                        ">
+                @if(inputCountry?.touched || isSubmitClick){
+                <span>
+                    @if(inputCountry?.errors?.['required']){
+                    <p class="error">
+                        Country is required!
+                    </p>
+                    }
+                </span>
+                }
             </div>
 
         </div>
@@ -91,10 +226,10 @@
 
         <div class="book-field">
             <label>Cover Image (URL)</label>
-            <input type="text" name="imageUrl" id="imageUrl" #inputImageUrl="ngModel" ngModel required >
+            <input type="text" name="imageUrl" id="imageUrl" #inputImageUrl="ngModel" ngModel required>
         </div>
     </div>
 
-    <button class="book-submit-btn theme-btn">Add Book</button>
+    <button type="submit" class="book-submit-btn theme-btn">Add Book</button>
 
 </form>

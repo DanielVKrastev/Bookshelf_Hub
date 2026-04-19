@@ -45,6 +45,16 @@
     min-width: 300px;
 }
 
+.error{
+  color: red;
+}
+
+.input-error {
+    border-left-color: red!important;
+    border-color: red!important;
+}
+
+
 /* mobile */
 @media (max-width:768px){
     .book-fields{
