@@ -23,3 +23,12 @@
   margin-top: 5px;
   font-size: 20px;
 }
+
+.error{
+    color: red;
+}
+
+.input-error {
+    border-left-color: red!important;
+    border-color: red!important;
+}

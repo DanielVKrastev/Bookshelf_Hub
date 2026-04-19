@@ -20,6 +20,8 @@ export class CurrentBookComponent implements OnInit {
   book: Book = <Book>{};
   isLoading: boolean = true;
   userId: string = '';
+  isSubmitClickReview: boolean = false;
+
 
   constructor(private route: ActivatedRoute, private apiService: ApiService, private userService: UserService, private router: Router, private cd: ChangeDetectorRef) {}
 
@@ -41,7 +43,6 @@ ngOnInit(): void {
 
     this.apiService.getSingleBook(bookId).subscribe(book => {
       this.book = book;
-        console.log(this.book);
       this.isLoading = false;
       this.cd.detectChanges();
     });
@@ -68,6 +69,7 @@ ngOnInit(): void {
 
   addReview(form: NgForm) {
     if (form.invalid || !form.value.terms || this.rating === 0) {
+      this.isSubmitClickReview = true;
       return;
     }
 
@@ -76,16 +78,27 @@ ngOnInit(): void {
       text = '(This user hasn’t written any reviews yet.)';
     }
 
-    this.apiService.createReviewForBook(this.book._id, this.rating, text).subscribe(data => {
-      form.reset();
-      this.resetHover();
-      this.loadBook();
+    this.apiService.createReviewForBook(this.book._id, this.rating, text).subscribe({
+      next: () => {
+        form.reset();
+        this.resetHover();
+        this.loadBook();
+      },
+      error: () => {
+        this.router.navigate(['/login']);
+      }
     });
   }
 
   addFavourite() {
-    this.apiService.favouriteForBook(this.book._id, this.userId).subscribe(data => {
-      this.loadBook();
+    this.apiService.favouriteForBook(this.book._id, this.userId).subscribe({
+      next: () => {
+        this.loadBook();
+        this.cd.detectChanges();
+      },
+      error: () => {
+        this.router.navigate(['/login']);
+      }
     });
   }
 

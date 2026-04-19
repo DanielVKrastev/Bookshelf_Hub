@@ -171,6 +171,15 @@
                                                 <label class="form-check-label" for="terms">
                                                     i accept your terms & conditions
                                                 </label>
+                                                 @if(inputTerms?.touched || isSubmitClickReview){
+                                                        <div>
+                                                            @if(inputTerms?.errors?.['required']){
+                                                                <p class="error">
+                                                                    Terms is required!
+                                                                </p>
+                                                            }
+                                                        </div>
+                                                    }
                                             </div>
                                             <button type="submit" class="theme-btn style-2">
                                                 Submit now
