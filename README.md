@@ -66,23 +66,23 @@ mongorestore -d bookshelf ./bookshelf
 
 ## 📁 Project Structure
 📁 Project Structure
-client/
- ├── src/
- │   ├── app/
- │   │   ├── core/
- │   │   ├── user/
- │   │   ├── books/
- │   │   ├── shared/
- │   │   └── types/
- │   └── assets/
- └── ...
-
- rest-api/
- ├── controllers/
- ├── models/
- ├── routes/
- ├── index.js
- └── ...
+client/ <br />
+ ├── src/ <br />
+ │   ├── app/ <br />
+ │   │   ├── core/ <br />
+ │   │   ├── user/ <br />
+ │   │   ├── books/ <br />
+ │   │   ├── shared/ <br />
+ │   │   └── types/ <br />
+ │   └── assets/ <br />
+ └── ... <br />
+<br />
+ rest-api/ <br />
+ ├── controllers/ <br />
+ ├── models/ <br />
+ ├── routes/ <br />
+ ├── index.js <br />
+ └── ... <br />
 
 ## 🎯 Future Improvements
 - Ratings system
@@ -112,6 +112,82 @@ client/
 <div>
    <h4>User navigation</h4>
    <img src="https://raw.githubusercontent.com/DanielVKrastev/bookshelf_hub/main/client/screenshots/user-navbar.png">
+</div>
+
+#### **Home page:**
+<div>
+   <img src="https://raw.githubusercontent.com/DanielVKrastev/bookshelf_hub/main/client/screenshots/home-page.png">
+</div>
+
+#### **Books catalog:**
+<div>
+   <img src="https://raw.githubusercontent.com/DanielVKrastev/bookshelf_hub/main/client/screenshots/books-catalog-page.png">
+</div>
+
+#### **Current Book:**
+<div>
+   <img src="https://raw.githubusercontent.com/DanielVKrastev/bookshelf_hub/main/client/screenshots/current-book-page.png">
+</div>
+
+#### **Login Page:**
+<div>
+   <img src="https://raw.githubusercontent.com/DanielVKrastev/bookshelf_hub/main/client/screenshots/login-page.png">
+</div>
+
+#### **Register Page:**
+<div>
+   <img src="https://raw.githubusercontent.com/DanielVKrastev/bookshelf_hub/main/client/screenshots/register-page.png">
+</div>
+<div>
+    <h4>Register page with validation </h4>
+   <img src="https://raw.githubusercontent.com/DanielVKrastev/bookshelf_hub/main/client/screenshots/register-page-validation.png">
+</div>
+
+#### **My Profile Page:**
+<div>
+   <img src="https://raw.githubusercontent.com/DanielVKrastev/bookshelf_hub/main/client/screenshots/my-profile-page.png">
+</div>
+<div>
+    <h4>Edit profile </h4>
+   <img src="https://raw.githubusercontent.com/DanielVKrastev/bookshelf_hub/main/client/screenshots/edit-profile.png">
+</div>
+
+#### **My Books Page:**
+<div>
+   <img src="https://raw.githubusercontent.com/DanielVKrastev/bookshelf_hub/main/client/screenshots/my-books-page.png">
+</div>
+<div>
+    <h4>Edit book </h4>
+   <img src="https://raw.githubusercontent.com/DanielVKrastev/bookshelf_hub/main/client/screenshots/my-books-page-edit.png">
+</div>
+
+#### **My Reviews Page:**
+<div>
+   <img src="https://raw.githubusercontent.com/DanielVKrastev/bookshelf_hub/main/client/screenshots/my-reviews-page.png">
+</div>
+<div>
+    <h4>Edit book </h4>
+   <img src="https://raw.githubusercontent.com/DanielVKrastev/bookshelf_hub/main/client/screenshots/my-reviews-page-edit.png">
+</div>
+
+#### **Add Book Page:**
+<div>
+    <h4>Write review </h4>
+   <img src="https://raw.githubusercontent.com/DanielVKrastev/bookshelf_hub/main/client/screenshots/add-book-page.png">
+</div>
+<div>
+    <h4>Display review </h4>
+   <img src="https://raw.githubusercontent.com/DanielVKrastev/bookshelf_hub/main/client/screenshots/add-book-page-validation.png">
+</div>
+
+#### **Add review in Current Book Page:**
+<div>
+    <h4>Write review </h4>
+   <img src="https://raw.githubusercontent.com/DanielVKrastev/bookshelf_hub/main/client/screenshots/write-review.png">
+</div>
+<div>
+    <h4>Display review </h4>
+   <img src="https://raw.githubusercontent.com/DanielVKrastev/bookshelf_hub/main/client/screenshots/show-review.png">
 </div>
 
 ## 👨‍💻 Author
