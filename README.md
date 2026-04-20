@@ -1,4 +1,4 @@
-# 📚 Bookshelf_Hub - Book Forum Application
+# 📚 Bookshelf_Hub - Book Forum Application (SoftUni Project)
 A modern Angular-based application that allows users to explore, share and discuss books. <br />
 Users can register, login, browse book catalogs, view detailed information, and create or manage their own book content.
 <br />
@@ -64,6 +64,17 @@ If you have a dump:
 mongorestore -d bookshelf ./bookshelf
 ```
 
+## 🧪 Test User
+
+You can use the following test account to explore the application:
+
+Email: test2026@test.com
+Password: test2026
+
+## 🌐 Application URLs
+Frontend: http://localhost:4200
+Backend: http://localhost:3000
+
 ## 📁 Project Structure
 📁 Project Structure
 client/ <br />
@@ -96,7 +107,7 @@ client/ <br />
 #### **User Authentication Links:**
 - **Guest** (not logged in):
   - **Log In**: Redirects to the Login page.  
-  - **Register**: Redirects to the Registration page.  
+  - **Register**: Redirects to the Registration page.
 
 - **User** (logged in):
   - **Add Book**: Redirects to the Add book.  
@@ -166,17 +177,16 @@ client/ <br />
    <img src="https://raw.githubusercontent.com/DanielVKrastev/bookshelf_hub/main/client/screenshots/my-reviews-page.png">
 </div>
 <div>
-    <h4>Edit book </h4>
+    <h4>Edit review </h4>
    <img src="https://raw.githubusercontent.com/DanielVKrastev/bookshelf_hub/main/client/screenshots/my-reviews-page-edit.png">
 </div>
 
 #### **Add Book Page:**
 <div>
-    <h4>Write review </h4>
    <img src="https://raw.githubusercontent.com/DanielVKrastev/bookshelf_hub/main/client/screenshots/add-book-page.png">
 </div>
 <div>
-    <h4>Display review </h4>
+    <h4>Validation inputs </h4>
    <img src="https://raw.githubusercontent.com/DanielVKrastev/bookshelf_hub/main/client/screenshots/add-book-page-validation.png">
 </div>
 
